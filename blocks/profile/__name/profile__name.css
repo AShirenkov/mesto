@@ -1,0 +1,16 @@
+.profile__name {
+  padding: 0;
+  margin: 0;
+
+  grid-area: name;
+
+  font-size: 42px;
+  line-height: 1.14;
+  font-style: normal;
+  font-weight: 500;
+  text-align: left;
+  /* margin: 5px 5px 10px 0; */
+  margin-top: 20px;
+
+  /* max-width: 284px; */
+}

@@ -1,0 +1,13 @@
+.profile__descr {
+  grid-area: descr;
+  font-size: 18px;
+  line-height: 1.22;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+  /* max-width: 336px; */
+  padding: 0;
+  margin: 0;
+  align-self: start;
+  justify-self: start;
+}
