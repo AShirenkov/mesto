@@ -10,4 +10,7 @@
   margin: 0;
   align-self: start;
   justify-self: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
