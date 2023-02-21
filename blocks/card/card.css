@@ -1,0 +1,19 @@
+.card {
+  margin: 0;
+  padding: 0;
+  max-width: 282px;
+  display: grid;
+  grid-template-areas:
+    "img img"
+    "title like";
+  background-color: white;
+  align-items: baseline;
+  justify-content: space-between;
+  row-gap: 25px;
+
+  border-radius: 10px;
+
+  /* justify-content: right; */
+
+  /* justify-content: space-between; */
+}
