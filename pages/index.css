@@ -34,3 +34,4 @@
 @import url(../blocks/popup/__input-text/_type_description/popup__input-text_type_description.css);
 
 @import url(../blocks/popup/__input-text/_type_name/popup__input-text_type_name.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
