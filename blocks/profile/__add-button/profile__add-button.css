@@ -8,7 +8,6 @@
 
   margin: 0;
   padding: 0;
-  /* align-self: center; */
 }
 @media (max-width: 880px) {
   .profile__add-button {

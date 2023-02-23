@@ -21,9 +21,6 @@
 
 @media (max-width: 600px) {
   .popup__input-text {
-    /* font-size: 14px;
-    line-height: 1.21; */
     max-width: 238px;
-    /* max-height: 20px; */
   }
 }
