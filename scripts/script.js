@@ -29,3 +29,10 @@ function savePopup() {
 closeButton.addEventListener("click", closePopup);
 editButton.addEventListener("click", openPopup);
 saveButton.addEventListener("click", savePopup);
+
+popup.addEventListener("keydown", function (e) {
+  // evt.preventDefault();
+  if (e.keyCode === 13) {
+    savePopup();
+  }
+});
