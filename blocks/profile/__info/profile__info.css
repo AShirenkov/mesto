@@ -12,3 +12,21 @@
   padding: 0;
   /* margin-bottom: 50px; */
 }
+@media (max-width: 800px) {
+  .profile__info {
+    column-gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile__info {
+    margin-left: 28px;
+    /* margin-top: 26px; */
+    /* justify-content: space-between; */
+    /* align-items: flex-end; */
+    row-gap: 9px;
+    /* grid-template-areas:
+      "name edit"
+      "descr descr"; */
+  }
+}

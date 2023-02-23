@@ -14,3 +14,11 @@
   padding: 0;
   /* align-self: center; */
 }
+
+@media (max-width: 600px) {
+  .popup__close-button {
+    background-size: 20px 320px;
+    right: -5px;
+    top: -40px;
+  }
+}

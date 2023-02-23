@@ -14,3 +14,16 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media (max-width: 800px) {
+  .profile__descr {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+@media (max-width: 600px) {
+  .profile__descr {
+    justify-self: center;
+    font-size: 14px;
+  }
+}

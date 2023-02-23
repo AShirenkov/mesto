@@ -16,3 +16,12 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media (max-width: 600px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 1.22;
+    margin-left: 22px;
+    margin-top: 26px;
+  }
+}

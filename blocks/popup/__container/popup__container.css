@@ -9,3 +9,9 @@
   /* padding: 34px 36px 37px; */
   /* position: fixed; */
 }
+@media (max-width: 600px) {
+  .popup__container {
+    max-width: 282px;
+    max-height: 322px;
+  }
+}
