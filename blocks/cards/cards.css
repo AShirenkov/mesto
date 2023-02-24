@@ -31,11 +31,6 @@
 @media (max-width: 700px) {
   .cards {
     max-width: calc(100% - 50px - 50px);
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(calc((100% / 2) - 15px), 1fr)
-    );
-    column-gap: 15px;
   }
 }
 
