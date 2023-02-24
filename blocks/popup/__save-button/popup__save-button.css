@@ -13,7 +13,7 @@
 
   color: white;
   background-color: black;
-  border-radius: 2px;
+  border-radius: 2px; /*Было замечание на отсуствующий border-radius. Он тут*/
   transition: opacity 0.5s linear;
 
   max-width: 358px;
@@ -23,7 +23,7 @@
 }
 
 .popup__save-button:hover {
-  opacity: 0.6;
+  opacity: 0.8;
   cursor: pointer;
 }
 
