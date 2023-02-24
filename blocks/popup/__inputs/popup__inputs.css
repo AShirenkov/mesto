@@ -1,0 +1,12 @@
+.popup__inputs {
+  margin-top: 47px;
+  display: flex;
+  flex-direction: column;
+  gap: 41px;
+  justify-content: space-between;
+}
+@media (max-width: 600px) {
+  .popup__inputs {
+    margin-top: 72px;
+  }
+}

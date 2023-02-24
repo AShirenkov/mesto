@@ -3,7 +3,7 @@
 
   padding: 0;
   margin: auto;
-  margin-top: 48px;
+  margin-top: 56px;
 
   font-size: 18px;
   line-height: 1.22;
@@ -33,6 +33,6 @@
     max-height: 46px;
     font-size: 14px;
     line-height: 1.21;
-    margin-top: 46px;
+    margin-top: 54px;
   }
 }
