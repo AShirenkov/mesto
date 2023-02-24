@@ -1,6 +1,8 @@
 let closeButton = document.querySelector('.popup__close-button');
 let editButton = document.querySelector('.profile__edit-button');
-let saveButton = document.querySelector('.popup__save-button');
+// let saveButton = document.querySelector('.popup__save-button');
+
+let formContainer = document.querySelector('.popup__container');
 
 let popup = document.querySelector('.popup');
 
@@ -20,19 +22,13 @@ function openPopup() {
 
   popup.classList.add('popup_opened');
 }
-function savePopup() {
+function savePopup(evt) {
+  evt.preventDefault();
   currentName.textContent = editName.value;
   currentDescriprion.textContent = editDescriprion.value;
 
-  popup.classList.add('popup_opened');
+  popup.classList.remove('popup_opened');
 }
 closeButton.addEventListener('click', closePopup);
 editButton.addEventListener('click', openPopup);
-saveButton.addEventListener('click', savePopup);
-
-popup.addEventListener('keydown', function (e) {
-  // evt.preventDefault();
-  if (e.keyCode === 13) {
-    savePopup();
-  }
-});
+formContainer.addEventListener('submit', savePopup);
