@@ -13,7 +13,8 @@
 
   color: white;
   background-color: black;
-  border-radius: 2px; /*Было замечание на отсуствующий border-radius. Он тут*/
+  border: none;
+  border-radius: 2px;
   transition: opacity 0.5s linear;
 
   max-width: 358px;
