@@ -1,9 +1,10 @@
 .profile__edit-button {
   width: 24px;
   height: 24px;
+  /* align-self: flex-start; */
 
   background-color: black;
-  background: url("../../../images/write.svg") center no-repeat;
+  background: url('../../../images/write.svg') center no-repeat;
   background-size: 10px 10px;
   border: 1px white solid;
   grid-area: edit;
