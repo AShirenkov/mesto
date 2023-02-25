@@ -27,7 +27,7 @@ function savePopup(evt) {
   currentName.textContent = editName.value;
   currentDescriprion.textContent = editDescriprion.value;
 
-  popup.classList.remove('popup_opened');
+  closePopup();
 }
 closeButton.addEventListener('click', closePopup);
 editButton.addEventListener('click', openPopup);
