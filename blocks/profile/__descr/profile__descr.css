@@ -5,11 +5,12 @@
   font-style: normal;
   font-weight: 400;
   text-align: left;
-
+  width: 100%;
   padding: 0;
   margin: 0;
   align-self: start;
   justify-self: start;
+
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -24,6 +25,6 @@
 @media (max-width: 600px) {
   .profile__descr {
     justify-self: center;
-    font-size: 14px;
+    text-align: center;
   }
 }

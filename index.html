@@ -24,10 +24,10 @@
             <div class="profile__info">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <h2 class="profile__descr">Исследователь океана</h2>
-              <button class="profile__edit-button opacity-button"></button>
+              <button type="button" class="profile__edit-button opacity-button"></button>
             </div>
           </div>
-          <button class="profile__add-button opacity-button"></button>
+          <button type="button" class="profile__add-button opacity-button"></button>
 
 
         </div>
@@ -35,42 +35,40 @@
       </section>
 
       <section class="cards">
-        <div class="card">
+        <article class="card">
           <img src="images/Karachaevsk.jpg" alt="Картинка карачаевска" class="card__img">
           <h2 class="card__title">Карачаевск</h2>
-          <button class="card__like opacity-button"></button>
-          <button class="card__trash-button opacity-button"></button>
-        </div>
-        <div class="card">
+          <button type="button" class="card__like opacity-button"></button>
+        </article>
+        <article class="card">
           <img src="images/elbrus.jpg" alt="Картинка Эльбруса" class="card__img">
           <h2 class="card__title">Гора Эльбрус</h2>
-          <button class="card__like opacity-button"></button>
+          <button type="button" class="card__like opacity-button"></button>
           <button class="card__trash-button opacity-button"></button>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="images/dombai.jpg" alt="Картинка Домбая" class="card__img">
           <h2 class="card__title">Домбай</h2>
-          <button class="card__like opacity-button"></button>
+          <button type="button" class="card__like opacity-button"></button>
           <button class="card__trash-button opacity-button"></button>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="images/elbrus.jpg" alt="Картинка Эльбруса" class="card__img">
           <h2 class="card__title">Гора Эльбрус</h2>
-          <button class="card__like opacity-button"></button>
+          <button type="button" class="card__like opacity-button"></button>
           <button class="card__trash-button opacity-button"></button>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="images/dombai.jpg" alt="Картинка Домбая" class="card__img">
           <h2 class="card__title">Домбай</h2>
-          <button class="card__like opacity-button"></button>
+          <button type="button" class="card__like opacity-button"></button>
           <button class="card__trash-button opacity-button"></button>
-        </div>
-        <div class="card">
+        </article>
+        <article class="card">
           <img src="images/Karachaevsk.jpg" alt="Картинка Карачаевска" class="card__img">
           <h2 class="card__title">Карачаево-Черкессия</h2>
-          <button class="card__like opacity-button"></button>
-          <button class="card__trash-button opacity-button"></button>
-        </div>
+          <button type="button" class="card__like opacity-button"></button>
+        </article>
       </section>
 
     </main>
@@ -80,16 +78,20 @@
     </footer>
     <div class="popup">
       <div class="popup__container">
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" placeholder="Имя" class="popup__input-text popup__input-text_type_name">
-        <input type="text" placeholder="Род деятельности" class="popup__input-text popup__input-text_type_description">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form name="formEditUser" class="popup__edit-form">
+          <input name="nameUser" type="text" placeholder="Имя" class="popup__input-text popup__input-text_type_name">
+          <input name="description" type="text" placeholder="Род деятельности"
+            class="popup__input-text popup__input-text_type_description">
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
 
-        <button class="popup__save-button">Сохранить</button>
-        <button class="popup__close-button opacity-button"></button>
+
+        <button type="button" class="popup__close-button opacity-button"></button>
       </div>
     </div>
   </div>
-  <script src="scripts/script.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 
 </html>
