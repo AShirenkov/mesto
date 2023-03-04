@@ -4,6 +4,7 @@
   max-width: 282px;
   display: grid;
   grid-template-areas:
+    /* "delete delete" */
     "img img"
     "title like";
   background-color: white;
@@ -12,4 +13,5 @@
   row-gap: 25px;
 
   border-radius: 10px;
+  position: relative;
 }
