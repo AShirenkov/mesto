@@ -71,8 +71,16 @@ initialCards.forEach((card) => {
 
   const cardImg = cardTemplate.querySelector('.card__img');
   cardImg.setAttribute('src', card.link);
-
   cardImg.setAttribute('alt', 'Картинка ' + card.name);
+
+  const removeCardButton = cardTemplate.querySelector('.card__trash-button');
+  removeCardButton.addEventListener('click', handleRemoveBtnClick);
 
   cards.append(cardTemplate);
 });
+
+function handleRemoveBtnClick(event) {
+  const button = event.target;
+  const card = button.closest('.card');
+  card.remove();
+}
