@@ -62,6 +62,16 @@ formContainer.addEventListener('submit', savePopup);
 
 const cards = document.querySelector('.cards');
 
+function handleRemoveBtnClick(event) {
+  const button = event.target;
+  const card = button.closest('.card');
+  card.remove();
+}
+function handleLikeBtnClick(event) {
+  console.log('rkbr');
+  event.target.classList.toggle('card__like_active');
+}
+
 initialCards.forEach((card) => {
   const cardTemplate = document
     .querySelector('#cardTemplate')
@@ -76,11 +86,8 @@ initialCards.forEach((card) => {
   const removeCardButton = cardTemplate.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', handleRemoveBtnClick);
 
+  const likeCardButton = cardTemplate.querySelector('.card__like');
+  likeCardButton.addEventListener('click', handleLikeBtnClick);
+
   cards.append(cardTemplate);
 });
-
-function handleRemoveBtnClick(event) {
-  const button = event.target;
-  const card = button.closest('.card');
-  card.remove();
-}
