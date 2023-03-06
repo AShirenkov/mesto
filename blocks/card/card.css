@@ -5,9 +5,10 @@
   display: grid;
   grid-template-areas:
     /* "delete delete" */
-    "img img"
-    "title like";
+    'img img'
+    'title like';
   background-color: white;
+  grid-template-rows: 282px 1fr;
   align-items: baseline;
   justify-content: space-between;
   row-gap: 25px;
