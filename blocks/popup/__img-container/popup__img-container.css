@@ -8,3 +8,8 @@
   max-height: 75vh;
   position: relative;
 }
+/* @media (max-width: 600px) {
+  .popup__img-container {
+    max-width: 95vw;
+  }
+} */

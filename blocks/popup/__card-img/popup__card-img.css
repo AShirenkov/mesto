@@ -2,3 +2,8 @@
   max-width: 75vw;
   max-height: 75vh;
 }
+/* @media (max-width: 500px) {
+  .popup__card-img {
+    max-width: 282px;
+  }
+} */
