@@ -51,7 +51,7 @@ const popupCardUrlPlace = formAddCard.elements.urlPlace;
 
 const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
 
-const addCardButton = document.querySelector('.card__add-button');
+const addCardButton = document.querySelector('.profile__card-add-button');
 
 const cards = document.querySelector('.cards');
 
