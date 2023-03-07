@@ -3,4 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
   margin-top: 90px auto 0;
+
+  max-width: 75vw;
+  max-height: 75vh;
+  position: relative;
 }

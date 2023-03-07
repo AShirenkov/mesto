@@ -25,33 +25,40 @@ const initialCards = [
   },
 ];
 
-let editProfileButton = document.querySelector('.profile__edit-button');
-let currentName = document.querySelector('.profile__name');
-let currentDescriprion = document.querySelector('.profile__descr');
+const editProfileButton = document.querySelector('.profile__edit-button');
+const currentName = document.querySelector('.profile__name');
+const currentDescriprion = document.querySelector('.profile__descr');
 
-let popupProfile = document.querySelector('.popup_type_profile');
+const popupProfile = document.querySelector('.popup_type_profile');
 
-let formEditProfile = document.forms.formEditProfile;
-let popupProfileName = formEditProfile.elements.nameProfile;
-let popupProfileDescription = formEditProfile.elements.descriptionProfile;
+const formEditProfile = document.forms.formEditProfile;
+const popupProfileName = formEditProfile.elements.nameProfile;
+const popupProfileDescription = formEditProfile.elements.descriptionProfile;
 
-let popupProfileSaveButton = popupProfile.querySelector('.popup__save-button');
+const popupProfileSaveButton = popupProfile.querySelector(
+  '.popup__save-button'
+);
 
-let popupProfileCloseButton = popupProfile.querySelector(
+const popupProfileCloseButton = popupProfile.querySelector(
   '.popup__close-button'
 );
 
-let popupCard = document.querySelector('.popup_type_card');
-let formAddCard = document.forms.formAddCard;
+const popupCard = document.querySelector('.popup_type_card');
+const formAddCard = document.forms.formAddCard;
 
-let popupCardNamePlace = formAddCard.elements.namePlace;
-let popupCardUrlPlace = formAddCard.elements.urlPlace;
-console.log(popupCardNamePlace);
-let popupCardCloseButton = popupCard.querySelector('.popup__close-button');
+const popupCardNamePlace = formAddCard.elements.namePlace;
+const popupCardUrlPlace = formAddCard.elements.urlPlace;
 
-let addCardButton = document.querySelector('.card__add-button');
+const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
+
+const addCardButton = document.querySelector('.card__add-button');
 
 const cards = document.querySelector('.cards');
+
+const popupImg = document.querySelector('.popup_type_img');
+const popupImgPicture = popupImg.querySelector('.popup__card-img');
+const popupImgText = popupImg.querySelector('.popup__text-img');
+const popupImgCloseButton = popupImg.querySelector('.popup__close-button');
 
 /*Функции закрытия попапа по нажатию кнопки крестик*/
 const closePopupProfile = () => {
@@ -64,6 +71,9 @@ const closePopupCard = () => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+};
+const closePopupImg = () => {
+  closePopup(popupImg);
 };
 
 /*Функция открытия произвольного попапа*/
@@ -84,6 +94,18 @@ const openPopupAddCard = () => {
   openPopup(popupCard);
 };
 
+/*Функция открытия окна добавления новой карточки*/
+const openPopupImg = (event) => {
+  const button = event.target;
+  const src = button.getAttribute('src');
+  const text = button.getAttribute('alt');
+  popupImgPicture.setAttribute('src', src);
+  popupImgPicture.setAttribute('alt', text);
+  popupImgText.textContent = text;
+
+  openPopup(popupImg);
+};
+
 editProfileButton.addEventListener('click', openPopupProfile);
 addCardButton.addEventListener('click', openPopupAddCard);
 
@@ -99,7 +121,7 @@ formEditProfile.addEventListener('submit', savePopupProfile);
 
 const createNewCard = (event) => {
   event.preventDefault();
-  let cardTemplate = createCard(
+  const cardTemplate = createCard(
     popupCardNamePlace.value,
     popupCardUrlPlace.value
   );
@@ -114,6 +136,7 @@ formAddCard.addEventListener('submit', createNewCard);
 
 popupCardCloseButton.addEventListener('click', closePopupCard);
 popupProfileCloseButton.addEventListener('click', closePopupProfile);
+popupImgCloseButton.addEventListener('click', closePopupImg);
 
 /*Функция отрисовки карточки и подписки на события*/
 const createCard = (name, src) => {
@@ -125,13 +148,16 @@ const createCard = (name, src) => {
 
   const cardImg = cardTemplate.querySelector('.card__img');
   cardImg.setAttribute('src', src);
-  cardImg.setAttribute('alt', 'Картинка ' + name);
+  cardImg.setAttribute('alt', name);
 
   const removeCardButton = cardTemplate.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', handleRemoveBtnClick);
 
   const likeCardButton = cardTemplate.querySelector('.card__like');
   likeCardButton.addEventListener('click', handleLikeBtnClick);
+
+  const imgCardButton = cardTemplate.querySelector('.card__img');
+  imgCardButton.addEventListener('click', openPopupImg);
 
   return cardTemplate;
 };
