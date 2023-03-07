@@ -29,47 +29,93 @@ let editProfileButton = document.querySelector('.profile__edit-button');
 let currentName = document.querySelector('.profile__name');
 let currentDescriprion = document.querySelector('.profile__descr');
 
+let popupProfile = document.querySelector('.popup_type_profile');
+
+let formEditProfile = document.forms.formEditProfile;
+let popupProfileName = formEditProfile.elements.nameProfile;
+let popupProfileDescription = formEditProfile.elements.descriptionProfile;
+
+let popupProfileSaveButton = popupProfile.querySelector('.popup__save-button');
+
+let popupProfileCloseButton = popupProfile.querySelector(
+  '.popup__close-button'
+);
+
+let popupCard = document.querySelector('.popup_type_card');
+let formAddCard = document.forms.formAddCard;
+
+let popupCardNamePlace = formAddCard.elements.namePlace;
+let popupCardUrlPlace = formAddCard.elements.urlPlace;
+console.log(popupCardNamePlace);
+let popupCardCloseButton = popupCard.querySelector('.popup__close-button');
+
 let addCardButton = document.querySelector('.card__add-button');
 
-const closePopup = (event) => {
-  const button = event.target;
-  const popup = button.closest('.popup');
+const cards = document.querySelector('.cards');
 
+/*Функции закрытия попапа по нажатию кнопки крестик*/
+const closePopupProfile = () => {
+  closePopup(popupProfile);
+};
+
+const closePopupCard = () => {
+  closePopup(popupCard);
+};
+
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 };
 
-const openPopup = (popup, inputFieldTop, inputFieldBottom) => {
-  let editName = popup.querySelector('.popup__input-text_type_name');
-  let editDescription = popup.querySelector(
-    '.popup__input-text_type_description'
-  );
-  let placeName = popup.querySelector('.popup__input-text_type_name-place');
-  let editUrl = popup.querySelector('.popup__input-text_type_url-place');
-  if (inputFieldTop !== '') {
-    editName.value = inputFieldTop;
-    editDescription.value = inputFieldBottom;
-  } else {
-    placeName.value = inputFieldTop;
-    editUrl.value = inputFieldBottom;
-  }
-
+/*Функция открытия произвольного попапа*/
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
 };
 
+/*Функция открытия окна с параметрами пользователя*/
 const openPopupProfile = () => {
-  const popup = document.querySelector('.popup_type_profile');
+  popupProfileName.value = currentName.textContent;
+  popupProfileDescription.value = currentDescriprion.textContent;
 
-  const name = currentName.textContent;
-  const description = currentDescriprion.textContent;
-
-  openPopup(popup, name, description);
+  openPopup(popupProfile);
 };
+
+/*Функция открытия окна добавления новой карточки*/
 const openPopupAddCard = () => {
-  const popup = document.querySelector('.popup_type_card');
-
-  openPopup(popup, '', '');
+  openPopup(popupCard);
 };
 
+editProfileButton.addEventListener('click', openPopupProfile);
+addCardButton.addEventListener('click', openPopupAddCard);
+
+const savePopupProfile = (event) => {
+  event.preventDefault();
+  currentName.textContent = popupProfileName.value;
+  currentDescriprion.textContent = popupProfileDescription.value;
+
+  closePopup(popupProfile);
+};
+
+formEditProfile.addEventListener('submit', savePopupProfile);
+
+const createNewCard = (event) => {
+  event.preventDefault();
+  let cardTemplate = createCard(
+    popupCardNamePlace.value,
+    popupCardUrlPlace.value
+  );
+  popupCardNamePlace.value = '';
+  popupCardUrlPlace.value = '';
+
+  cards.prepend(cardTemplate);
+  closePopupCard();
+};
+
+formAddCard.addEventListener('submit', createNewCard);
+
+popupCardCloseButton.addEventListener('click', closePopupCard);
+popupProfileCloseButton.addEventListener('click', closePopupProfile);
+
+/*Функция отрисовки карточки и подписки на события*/
 const createCard = (name, src) => {
   const cardTemplate = document
     .querySelector('#cardTemplate')
@@ -87,71 +133,22 @@ const createCard = (name, src) => {
   const likeCardButton = cardTemplate.querySelector('.card__like');
   likeCardButton.addEventListener('click', handleLikeBtnClick);
 
-  cards.prepend(cardTemplate);
+  return cardTemplate;
 };
 
-const savePopup = (event) => {
-  event.preventDefault();
-  const button = event.target;
-  const popup = button.closest('.popup');
-  let editName = popup.querySelector('.popup__input-text_type_name');
-  let editDescription = popup.querySelector(
-    '.popup__input-text_type_description'
-  );
-  let placeName = popup.querySelector('.popup__input-text_type_name-place');
-  let editUrl = popup.querySelector('.popup__input-text_type_url-place');
-
-  if (editUrl === null) {
-    currentName.textContent = editName.value;
-
-    currentDescriprion.textContent = editDescription.value;
-  } else {
-    createCard(placeName.value, editUrl.value);
-  }
-
-  closePopup(event);
-};
-
-editProfileButton.addEventListener('click', openPopupProfile);
-
-addCardButton.addEventListener('click', openPopupAddCard);
-
-let popups = document.querySelectorAll('.popup');
-popups.forEach((popup) => {
-  const closeButton = popup.querySelector('.popup__close-button');
-  const formContainer = popup.querySelector('.popup__container');
-
-  closeButton.addEventListener('click', closePopup);
-  formContainer.addEventListener('submit', savePopup);
-});
-
-const cards = document.querySelector('.cards');
-
+/*Функция удаления карточки*/
 const handleRemoveBtnClick = (event) => {
   const button = event.target;
   const card = button.closest('.card');
   card.remove();
 };
+/*Функция установки лайка на карточке*/
 const handleLikeBtnClick = (event) => {
   event.target.classList.toggle('card__like_active');
 };
 
 initialCards.forEach((card) => {
-  const cardTemplate = document
-    .querySelector('#cardTemplate')
-    .content.cloneNode(true);
-  const cardTitle = cardTemplate.querySelector('.card__title');
-  cardTitle.textContent = card.name;
-
-  const cardImg = cardTemplate.querySelector('.card__img');
-  cardImg.setAttribute('src', card.link);
-  cardImg.setAttribute('alt', 'Картинка ' + card.name);
-
-  const removeCardButton = cardTemplate.querySelector('.card__trash-button');
-  removeCardButton.addEventListener('click', handleRemoveBtnClick);
-
-  const likeCardButton = cardTemplate.querySelector('.card__like');
-  likeCardButton.addEventListener('click', handleLikeBtnClick);
+  let cardTemplate = createCard(card.name, card.link);
 
   cards.append(cardTemplate);
 });
