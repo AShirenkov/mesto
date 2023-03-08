@@ -12,17 +12,11 @@ const popupProfileSaveButton = popupProfile.querySelector(
   '.popup__save-button'
 );
 
-const popupProfileCloseButton = popupProfile.querySelector(
-  '.popup__close-button'
-);
-
 const popupCard = document.querySelector('.popup_type_card');
 const formAddCard = document.forms.formAddCard;
 
 const popupCardNamePlace = formAddCard.elements.namePlace;
 const popupCardUrlPlace = formAddCard.elements.urlPlace;
-
-const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
 
 const addCardButton = document.querySelector('.profile__card-add-button');
 
@@ -31,27 +25,21 @@ const cardsContainer = document.querySelector('.cards');
 const popupImg = document.querySelector('.popup_type_img');
 const popupImgPicture = popupImg.querySelector('.popup__card-img');
 const popupImgText = popupImg.querySelector('.popup__text-img');
-const popupImgCloseButton = popupImg.querySelector('.popup__close-button');
 
 const cardTemplate = document
   .querySelector('#cardTemplate')
-  .content.querySelector('.card'); //.cloneNode(true);
+  .content.querySelector('.card');
 
 /*Функции закрытия попапа по нажатию кнопки крестик*/
-const closePopupProfile = () => {
-  closePopup(popupProfile);
-};
-
-const closePopupCard = () => {
-  closePopup(popupCard);
-};
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 };
-const closePopupImg = () => {
-  closePopup(popupImg);
-};
+
+document.querySelectorAll('.popup__close-button').forEach((button) => {
+  const buttonsPopup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(buttonsPopup));
+});
 
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
@@ -98,14 +86,10 @@ const createNewCard = (event) => {
   formAddCard.reset();
 
   cardsContainer.prepend(newCard);
-  closePopupCard();
+  closePopup(popupCard);
 };
 
 formAddCard.addEventListener('submit', createNewCard);
-
-popupCardCloseButton.addEventListener('click', closePopupCard);
-popupProfileCloseButton.addEventListener('click', closePopupProfile);
-popupImgCloseButton.addEventListener('click', closePopupImg);
 
 /*Функция отрисовки карточки и подписки на события*/
 const createCard = (name, src) => {
