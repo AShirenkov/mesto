@@ -140,7 +140,7 @@ const handleLikeBtnClick = (event) => {
 };
 
 initialCards.forEach((card) => {
-  let newCard = createCard(card.name, card.link);
+  const newCard = createCard(card.name, card.link);
 
   cardsContainer.append(newCard);
 });
