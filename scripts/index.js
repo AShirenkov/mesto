@@ -26,7 +26,7 @@ const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
 
 const addCardButton = document.querySelector('.profile__card-add-button');
 
-const cards = document.querySelector('.cards');
+const cardsContainer = document.querySelector('.cards');
 
 const popupImg = document.querySelector('.popup_type_img');
 const popupImgPicture = popupImg.querySelector('.popup__card-img');
@@ -101,7 +101,7 @@ const createNewCard = (event) => {
   popupCardNamePlace.value = '';
   popupCardUrlPlace.value = '';
 
-  cards.prepend(cardTemplate);
+  cardsContainer.prepend(cardTemplate);
   closePopupCard();
 };
 
@@ -149,5 +149,5 @@ const handleLikeBtnClick = (event) => {
 initialCards.forEach((card) => {
   let cardTemplate = createCard(card.name, card.link);
 
-  cards.append(cardTemplate);
+  cardsContainer.append(cardTemplate);
 });
