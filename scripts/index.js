@@ -71,14 +71,10 @@ const openPopupAddCard = () => {
   openPopup(popupCard);
 };
 
-/*Функция открытия окна добавления новой карточки*/
-const openPopupImg = (event) => {
-  const button = event.target;
-  const src = button.getAttribute('src');
-  const text = button.getAttribute('alt');
+const openPopupImg = (src, name) => {
   popupImgPicture.setAttribute('src', src);
-  popupImgPicture.setAttribute('alt', text);
-  popupImgText.textContent = text;
+  popupImgPicture.setAttribute('alt', name);
+  popupImgText.textContent = name;
   openPopup(popupImg);
 };
 
@@ -120,7 +116,8 @@ const createCard = (name, src) => {
   const cardImg = newCard.querySelector('.card__img');
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
-  cardImg.addEventListener('click', openPopupImg);
+
+  cardImg.addEventListener('click', () => openPopupImg(src, name));
 
   const removeCardButton = newCard.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', handleRemoveBtnClick);
