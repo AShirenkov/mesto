@@ -98,8 +98,8 @@ const createNewCard = (event) => {
     popupCardNamePlace.value,
     popupCardUrlPlace.value
   );
-  popupCardNamePlace.value = '';
-  popupCardUrlPlace.value = '';
+
+  formAddCard.reset();
 
   cardsContainer.prepend(cardTemplate);
   closePopupCard();
