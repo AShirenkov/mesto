@@ -122,15 +122,13 @@ const createCard = (name, src) => {
   const cardImg = cardTemplate.querySelector('.card__img');
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
+  cardImg.addEventListener('click', openPopupImg);
 
   const removeCardButton = cardTemplate.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', handleRemoveBtnClick);
 
   const likeCardButton = cardTemplate.querySelector('.card__like');
   likeCardButton.addEventListener('click', handleLikeBtnClick);
-
-  const imgCardButton = cardTemplate.querySelector('.card__img');
-  imgCardButton.addEventListener('click', openPopupImg);
 
   return cardTemplate;
 };
