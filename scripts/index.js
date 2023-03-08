@@ -33,6 +33,10 @@ const popupImgPicture = popupImg.querySelector('.popup__card-img');
 const popupImgText = popupImg.querySelector('.popup__text-img');
 const popupImgCloseButton = popupImg.querySelector('.popup__close-button');
 
+const cardTemplate = document
+  .querySelector('#cardTemplate')
+  .content.querySelector('.card'); //.cloneNode(true);
+
 /*Функции закрытия попапа по нажатию кнопки крестик*/
 const closePopupProfile = () => {
   closePopup(popupProfile);
@@ -75,7 +79,6 @@ const openPopupImg = (event) => {
   popupImgPicture.setAttribute('src', src);
   popupImgPicture.setAttribute('alt', text);
   popupImgText.textContent = text;
-
   openPopup(popupImg);
 };
 
@@ -94,14 +97,11 @@ formEditProfile.addEventListener('submit', savePopupProfile);
 
 const createNewCard = (event) => {
   event.preventDefault();
-  const cardTemplate = createCard(
-    popupCardNamePlace.value,
-    popupCardUrlPlace.value
-  );
+  const newCard = createCard(popupCardNamePlace.value, popupCardUrlPlace.value);
 
   formAddCard.reset();
 
-  cardsContainer.prepend(cardTemplate);
+  cardsContainer.prepend(newCard);
   closePopupCard();
 };
 
@@ -113,24 +113,22 @@ popupImgCloseButton.addEventListener('click', closePopupImg);
 
 /*Функция отрисовки карточки и подписки на события*/
 const createCard = (name, src) => {
-  const cardTemplate = document
-    .querySelector('#cardTemplate')
-    .content.cloneNode(true);
-  const cardTitle = cardTemplate.querySelector('.card__title');
+  const newCard = cardTemplate.cloneNode(true);
+  const cardTitle = newCard.querySelector('.card__title');
   cardTitle.textContent = name;
 
-  const cardImg = cardTemplate.querySelector('.card__img');
+  const cardImg = newCard.querySelector('.card__img');
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
   cardImg.addEventListener('click', openPopupImg);
 
-  const removeCardButton = cardTemplate.querySelector('.card__trash-button');
+  const removeCardButton = newCard.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', handleRemoveBtnClick);
 
-  const likeCardButton = cardTemplate.querySelector('.card__like');
+  const likeCardButton = newCard.querySelector('.card__like');
   likeCardButton.addEventListener('click', handleLikeBtnClick);
 
-  return cardTemplate;
+  return newCard;
 };
 
 /*Функция удаления карточки*/
@@ -145,7 +143,7 @@ const handleLikeBtnClick = (event) => {
 };
 
 initialCards.forEach((card) => {
-  let cardTemplate = createCard(card.name, card.link);
+  let newCard = createCard(card.name, card.link);
 
-  cardsContainer.append(cardTemplate);
+  cardsContainer.append(newCard);
 });
