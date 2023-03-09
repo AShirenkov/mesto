@@ -100,8 +100,7 @@ const createCard = (name, src) => {
   const cardImg = newCard.querySelector('.card__img');
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
-  //спасибо за подсказку. Не знал как реализовать callback с параметрами.
-  //сразу бы сделал с подобной реализацией )
+
   cardImg.addEventListener('click', () => openPopupImg(src, name)); //спасибо
 
   const removeCardButton = newCard.querySelector('.card__trash-button');
