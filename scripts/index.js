@@ -104,7 +104,7 @@ const createCard = (name, src) => {
   cardImg.addEventListener('click', () => openPopupImg(src, name)); //спасибо
 
   const removeCardButton = newCard.querySelector('.card__trash-button');
-  removeCardButton.addEventListener('click', handleRemoveBtnClick);
+  removeCardButton.addEventListener('click', () => removeCardBtnClick(newCard));
 
   const likeCardButton = newCard.querySelector('.card__like');
   likeCardButton.addEventListener('click', handleLikeBtnClick);
@@ -113,9 +113,7 @@ const createCard = (name, src) => {
 };
 
 /*Функция удаления карточки*/
-const handleRemoveBtnClick = (event) => {
-  const button = event.target;
-  const card = button.closest('.card');
+const removeCardBtnClick = (card) => {
   card.remove();
 };
 /*Функция установки лайка на карточке*/
