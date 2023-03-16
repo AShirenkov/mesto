@@ -34,6 +34,7 @@ const cardTemplate = document
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  popup.removeEventListener('click', () => closePopup(popup));
 };
 
 document.querySelectorAll('.popup__close-button').forEach((button) => {
@@ -46,14 +47,18 @@ const stopProp = (child) => {
   child.addEventListener('click', (evt) => evt.stopPropagation());
 };
 /*функция закрытия попапа по клику на Overlay*/
-document.querySelectorAll('.popup').forEach((popupWindow) => {
-  stopProp(popupWindow.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
-  popupWindow.addEventListener('click', () => closePopup(popupWindow));
-});
+// document.querySelectorAll('.popup').forEach((popupWindow) => {
+//   popupWindow.addEventListener('keydown', (evt) => console.log(1));
+//   console.log(1);
+//   // stopProp(popupWindow.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
+//   popupWindow.addEventListener('click', () => closePopup(popupWindow));
+// });
 
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
+  popup.addEventListener('click', () => closePopup(popup));
 };
 
 /*Функция открытия окна с параметрами пользователя*/
