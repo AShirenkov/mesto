@@ -41,6 +41,16 @@ document.querySelectorAll('.popup__close-button').forEach((button) => {
   button.addEventListener('click', () => closePopup(buttonsPopup));
 });
 
+/*Функция отмены всплытия*/
+const stopProp = (child) => {
+  child.addEventListener('click', (evt) => evt.stopPropagation());
+};
+/*функция закрытия попапа по клику на Overlay*/
+document.querySelectorAll('.popup').forEach((popupWindow) => {
+  stopProp(popupWindow.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
+  popupWindow.addEventListener('click', () => closePopup(popupWindow));
+});
+
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
