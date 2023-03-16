@@ -101,13 +101,13 @@ const createCard = (name, src) => {
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
 
-  cardImg.addEventListener('click', () => openPopupImg(src, name)); //спасибо
+  cardImg.addEventListener('click', () => openPopupImg(src, name));
 
   const removeCardButton = newCard.querySelector('.card__trash-button');
   removeCardButton.addEventListener('click', () => removeCardBtnClick(newCard));
 
   const likeCardButton = newCard.querySelector('.card__like');
-  likeCardButton.addEventListener('click', handleLikeBtnClick);
+  likeCardButton.addEventListener('click', () => likeBtnClick(likeCardButton));
 
   return newCard;
 };
@@ -117,8 +117,8 @@ const removeCardBtnClick = (card) => {
   card.remove();
 };
 /*Функция установки лайка на карточке*/
-const handleLikeBtnClick = (event) => {
-  event.target.classList.toggle('card__like_active');
+const likeBtnClick = (buttonLike) => {
+  buttonLike.classList.toggle('card__like_active');
 };
 
 initialCards.forEach((card) => {
