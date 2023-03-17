@@ -150,3 +150,16 @@ document.addEventListener('keydown', (evt) => {
     checkAndCloseOpenedPopup();
   }
 });
+/////////////////
+
+//Выполняем валидацию форм
+const validationConfig = {
+  formSelector: '.popup__edit-form',
+  inputSelector: '.popup__input-text',
+  errorClassTemplate: '.popup__input-text-error_type_',
+  inputErrorClass: 'popup__input-text-error',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+};
+
+enableValidation(validationConfig);
