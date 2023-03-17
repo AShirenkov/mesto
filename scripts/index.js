@@ -46,18 +46,11 @@ document.querySelectorAll('.popup__close-button').forEach((button) => {
 const stopProp = (child) => {
   child.addEventListener('click', (evt) => evt.stopPropagation());
 };
-/*функция закрытия попапа по клику на Overlay*/
-// document.querySelectorAll('.popup').forEach((popupWindow) => {
-//   popupWindow.addEventListener('keydown', (evt) => console.log(1));
-//   console.log(1);
-//   // stopProp(popupWindow.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
-//   popupWindow.addEventListener('click', () => closePopup(popupWindow));
-// });
 
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
-  stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда есть один основной дочерий
+  stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда только один основной дочерий и достаточно остановить всплытие на нем
   popup.addEventListener('click', () => closePopup(popup));
 };
 
@@ -140,4 +133,20 @@ initialCards.forEach((card) => {
   const newCard = createCard(card.name, card.link);
 
   cardsContainer.append(newCard);
+});
+
+/* Проверка наличия открытых окон и закрытие каждого*/
+const checkAndCloseOpenedPopup = () => {
+  document.querySelectorAll('.popup_opened').forEach((popupOpened) => {
+    closePopup(popupOpened);
+  });
+};
+
+/*Проверка открытых окон по нажатию Escape*/
+document.addEventListener('keydown', (evt) => {
+  const keyName = evt.key;
+
+  if (keyName === 'Escape') {
+    checkAndCloseOpenedPopup();
+  }
 });
