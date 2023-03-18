@@ -1,36 +1,19 @@
-const editProfileButton = document.querySelector('.profile__edit-button');
-const currentName = document.querySelector('.profile__name');
-const currentDescriprion = document.querySelector('.profile__descr');
-
-const popupProfile = document.querySelector('.popup_type_profile');
-
-const formEditProfile = document.forms.formEditProfile;
-const popupProfileName = formEditProfile.elements.nameProfile;
-const popupProfileDescription = formEditProfile.elements.descriptionProfile;
-
-const popupProfileSaveButton = popupProfile.querySelector(
-  '.popup__save-button'
-);
-
-const popupCard = document.querySelector('.popup_type_card');
-const formAddCard = document.forms.formAddCard;
-
-const popupCardNamePlace = formAddCard.elements.namePlace;
-const popupCardUrlPlace = formAddCard.elements.urlPlace;
-
-const addCardButton = document.querySelector('.profile__card-add-button');
-
-const cardsContainer = document.querySelector('.cards');
-
-const popupImg = document.querySelector('.popup_type_img');
-const popupImgPicture = popupImg.querySelector('.popup__card-img');
-const popupImgText = popupImg.querySelector('.popup__text-img');
-
-const cardTemplate = document
-  .querySelector('#cardTemplate')
-  .content.querySelector('.card');
-
 /*Функции закрытия попапа по нажатию кнопки крестик*/
+
+const escapeButtonPressed = (evt) => {
+  const keyName = evt.key;
+
+  if (keyName === 'Escape') {
+    checkAndCloseOpenedPopup();
+  }
+};
+/*Подписка на событие нажатия Escape*/
+const addEscapeListener = () => {
+  document.addEventListener('keydown', escapeButtonPressed);
+};
+const removeEscapeListener = () => {
+  document.removeEventListener('keydown', escapeButtonPressed);
+};
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
@@ -38,45 +21,23 @@ const closePopup = (popup) => {
   removeEscapeListener();
 };
 
-document.querySelectorAll('.popup__close-button').forEach((button) => {
-  const buttonsPopup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(buttonsPopup));
-});
-
-/*Функция отмены всплытия*/
-const stopProp = (child) => {
-  child.addEventListener('click', (evt) => evt.stopPropagation());
-};
-/*Поиск импутов с кнопкой и проверка на валидность*/
-const getInputListAndSubmitButton = (form, config) => {
-  const inputList = form.querySelectorAll(config.inputSelector);
-  const submitButton = form.querySelector(config.submitButtonSelector);
-  inputList.forEach((input) => {
-    checkInputValidity(
-      input,
-      config.errorClassTemplate,
-      config.inputErrorClass,
-      config.inputTextClassError
-    );
-    toggleButtonState(submitButton, config.inactiveButtonClass, inputList);
+const popups = document.querySelectorAll('.popup');
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    //Отличная идея со всплытием события и обработкой двух действий в родительском объекте
+    if (
+      evt.target === evt.currentTarget ||
+      evt.target.classList.contains('popup__close-button')
+    ) {
+      closePopup(popup);
+    }
   });
-};
-
-/*Проверка валидности формы при открытии. Без подписок не события*/
-const checkValidInputsPopup = (popup, config) => {
-  const form = popup.querySelector(config.formSelector);
-  if (form != null) {
-    getInputListAndSubmitButton(form, config);
-  }
-};
+});
 
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
-  checkValidInputsPopup(popup, validationConfig);
-
   popup.classList.add('popup_opened');
-  stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда только один основной дочерий и достаточно остановить всплытие на нем
-  popup.addEventListener('click', () => closePopup(popup));
+
   addEscapeListener();
 };
 
@@ -103,11 +64,18 @@ const openPopupImg = (src, name) => {
 editProfileButton.addEventListener('click', openPopupProfile);
 addCardButton.addEventListener('click', openPopupAddCard);
 
+//блокирование кнопки сохранить по имени формы
+const disableButtonByForm = (form) => {
+  const button = form.querySelector(validationConfig.submitButtonSelector);
+  disableButton(button, validationConfig.inactiveButtonClass);
+};
+
 const savePopupProfile = (event) => {
   event.preventDefault();
   currentName.textContent = popupProfileName.value;
   currentDescriprion.textContent = popupProfileDescription.value;
 
+  disableButtonByForm(formEditProfile); //тут тоже добавил вызов, иначе поведение кнопки при первом старте и повторном вызове отличаются
   closePopup(popupProfile);
 };
 
@@ -120,6 +88,7 @@ const createNewCard = (event) => {
   formAddCard.reset();
 
   cardsContainer.prepend(newCard);
+  disableButtonByForm(formAddCard);
   closePopup(popupCard);
 };
 
@@ -166,20 +135,6 @@ const checkAndCloseOpenedPopup = () => {
   document.querySelectorAll('.popup_opened').forEach((popupOpened) => {
     closePopup(popupOpened);
   });
-};
-const escapeButtonPressed = (evt) => {
-  const keyName = evt.key;
-
-  if (keyName === 'Escape') {
-    checkAndCloseOpenedPopup();
-  }
-};
-/*Проверка открытых окон по нажатию Escape*/
-const addEscapeListener = () => {
-  document.addEventListener('keydown', escapeButtonPressed);
-};
-const removeEscapeListener = () => {
-  document.removeEventListener('keydown', escapeButtonPressed);
 };
 //Выполняем валидацию форм
 const validationConfig = {

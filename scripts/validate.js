@@ -72,6 +72,7 @@ const setEventListeners = (
     evt.preventDefault();
   });
 
+  toggleButtonState(submitButton, inactiveButtonClass, inputList);
   inputList.forEach((input) => {
     input.addEventListener('input', () => {
       checkInputValidity(
