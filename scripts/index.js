@@ -160,6 +160,7 @@ const validationConfig = {
   inputErrorClass: 'popup__input-text-error_active',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
+  inputTextClassError: 'popup__input-text_type_error',
 };
 
 enableValidation(validationConfig);
