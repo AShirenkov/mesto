@@ -94,8 +94,8 @@ const openPopupAddCard = () => {
 };
 
 const openPopupImg = (src, name) => {
-  popupImgPicture.setAttribute('src', src);
-  popupImgPicture.setAttribute('alt', name);
+  popupImgPicture.src = src;
+  popupImgPicture.alt = name;
   popupImgText.textContent = name;
   openPopup(popupImg);
 };
