@@ -46,9 +46,33 @@ document.querySelectorAll('.popup__close-button').forEach((button) => {
 const stopProp = (child) => {
   child.addEventListener('click', (evt) => evt.stopPropagation());
 };
+/*Поиск импутов с кнопкой и проверка на валидность*/
+const getInputListAndSubmitButton = (form, config) => {
+  const inputList = form.querySelectorAll(config.inputSelector);
+  const submitButton = form.querySelector(config.submitButtonSelector);
+  inputList.forEach((input) => {
+    checkInputValidity(
+      input,
+      config.errorClassTemplate,
+      config.inputErrorClass,
+      config.inputTextClassError
+    );
+    toggleButtonState(submitButton, config.inactiveButtonClass, inputList);
+  });
+};
+
+/*Проверка валидности формы при открытии. Без подписок не события*/
+const checkValidInputsPopup = (popup, config) => {
+  const form = popup.querySelector(config.formSelector);
+  if (form != null) {
+    getInputListAndSubmitButton(form, config);
+  }
+};
 
 /*Функция открытия произвольного попапа*/
 const openPopup = (popup) => {
+  checkValidInputsPopup(popup, validationConfig);
+
   popup.classList.add('popup_opened');
   stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда только один основной дочерий и достаточно остановить всплытие на нем
   popup.addEventListener('click', () => closePopup(popup));
@@ -150,7 +174,6 @@ document.addEventListener('keydown', (evt) => {
     checkAndCloseOpenedPopup();
   }
 });
-/////////////////
 
 //Выполняем валидацию форм
 const validationConfig = {
