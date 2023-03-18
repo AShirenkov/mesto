@@ -157,7 +157,7 @@ const validationConfig = {
   formSelector: '.popup__edit-form',
   inputSelector: '.popup__input-text',
   errorClassTemplate: '.popup__input-text-error_type_',
-  inputErrorClass: 'popup__input-text-error',
+  inputErrorClass: 'popup__input-text-error_active',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
 };

@@ -3,6 +3,7 @@
   margin: 0;
   margin-left: 36px;
   margin-top: 34px;
+  margin-bottom: 28px;
 
   font-size: 24px;
   line-height: 1.21;
@@ -23,5 +24,6 @@
     line-height: 1.22;
     margin-left: 22px;
     margin-top: 26px;
+    margin-bottom: 56px;
   }
 }

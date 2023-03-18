@@ -1,8 +1,4 @@
 .popup__edit-form {
-  margin-top: 48px;
-}
-@media (max-width: 600px) {
-  .popup__edit-form {
-    margin-top: 75px;
-  }
+  display: flex;
+  flex-direction: column;
 }
