@@ -1,18 +1,18 @@
 .popup__input-text-error {
-  display: block;
   padding: 0;
   margin: 0 auto;
 
-  font-size: 12px;
-  line-height: 1.25;
-  font-style: normal;
-  font-weight: 400;
-  text-align: left;
-
-  color: red;
-
   max-width: 358px;
-  max-height: 47px;
+
+  min-height: 35px;
   width: 100%;
   height: 100%;
+  opacity: 0;
+
+  padding-top: 5px;
+}
+@media (max-width: 600px) {
+  .popup__input-text-error {
+    max-width: 238px;
+  }
 }
