@@ -35,6 +35,7 @@ const cardTemplate = document
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('click', () => closePopup(popup));
+  removeEscapeListener();
 };
 
 document.querySelectorAll('.popup__close-button').forEach((button) => {
@@ -76,6 +77,7 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   stopProp(popup.firstElementChild); //сперва хотел пройтись рекурсивно по всем дочерним узлам, но по нашей разметке у нас всегда только один основной дочерий и достаточно остановить всплытие на нем
   popup.addEventListener('click', () => closePopup(popup));
+  addEscapeListener();
 };
 
 /*Функция открытия окна с параметрами пользователя*/
@@ -165,16 +167,20 @@ const checkAndCloseOpenedPopup = () => {
     closePopup(popupOpened);
   });
 };
-
-/*Проверка открытых окон по нажатию Escape*/
-document.addEventListener('keydown', (evt) => {
+const escapeButtonPressed = (evt) => {
   const keyName = evt.key;
 
   if (keyName === 'Escape') {
     checkAndCloseOpenedPopup();
   }
-});
-
+};
+/*Проверка открытых окон по нажатию Escape*/
+const addEscapeListener = () => {
+  document.addEventListener('keydown', escapeButtonPressed);
+};
+const removeEscapeListener = () => {
+  document.removeEventListener('keydown', escapeButtonPressed);
+};
 //Выполняем валидацию форм
 const validationConfig = {
   formSelector: '.popup__edit-form',
