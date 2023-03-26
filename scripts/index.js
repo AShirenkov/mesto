@@ -95,12 +95,12 @@ const createNewCard = (event) => {
 formAddCard.addEventListener('submit', createNewCard);
 
 /*Функция отрисовки карточки и подписки на события*/
-const createCard = (name, src) => {
-  const newCard = cardTemplate.cloneNode(true);
-  const cardTitle = newCard.querySelector('.card__title');
+/*const createCard = (name, src) => {
+  const newCard = cardTemplate.cloneNode(true); // создана функция _getTemplate
+  const cardTitle = newCard.querySelector('.card__title'); //+
   cardTitle.textContent = name;
 
-  const cardImg = newCard.querySelector('.card__img');
+  const cardImg = newCard.querySelector('.card__img'); //+
   cardImg.setAttribute('src', src);
   cardImg.setAttribute('alt', name);
 
@@ -113,20 +113,21 @@ const createCard = (name, src) => {
   likeCardButton.addEventListener('click', () => likeBtnClick(likeCardButton));
 
   return newCard;
-};
+};*/
 
 /*Функция удаления карточки*/
-const removeCardBtnClick = (card) => {
+/*const removeCardBtnClick = (card) => {
   card.remove();
-};
+};*/
 /*Функция установки лайка на карточке*/
-const likeBtnClick = (buttonLike) => {
+/*const likeBtnClick = (buttonLike) => {
   buttonLike.classList.toggle('card__like_active');
-};
+};*/
 
-initialCards.forEach((card) => {
-  const newCard = createCard(card.name, card.link);
-
+initialCards.forEach((item) => {
+  //const newCard = createCard(card.name, card.link);
+  const card = new Card(item, cardTemplate);
+  const newCard = card.createCard();
   cardsContainer.append(newCard);
 });
 
