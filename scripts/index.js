@@ -93,7 +93,6 @@ const savePopupProfile = (event) => {
   currentName.textContent = popupProfileName.value;
   currentDescriprion.textContent = popupProfileDescription.value;
 
-  //disableButtonByForm(formEditProfile); //тут тоже добавил вызов, иначе поведение кнопки при первом старте и повторном вызове отличаются
   closePopup(popupProfile);
 };
 
@@ -103,21 +102,23 @@ const createNewCard = (event) => {
   event.preventDefault();
   //const newCard = createCard(popupCardNamePlace.value, popupCardUrlPlace.value);
   const card = new Card(
-    { name: popupCardNamePlace.value, link: popupCardUrlPlace.value },
+    {
+      name: popupCardNamePlace.value,
+      link: popupCardUrlPlace.value,
+    },
     cardTemplate
   );
   const newCard = card.createCard();
   formAddCard.reset();
 
   cardsContainer.prepend(newCard);
-  // disableButtonByForm(formAddCard);
+
   closePopup(popupCard);
 };
 
 formAddCard.addEventListener('submit', createNewCard);
 
 initialCards.forEach((item) => {
-  //const newCard = createCard(card.name, card.link);
   const card = new Card(item, cardTemplate);
   const newCard = card.createCard();
   cardsContainer.append(newCard);
@@ -130,8 +131,6 @@ const checkAndCloseOpenedPopup = () => {
   });
 };
 
-//////////////////////////////////////////////
-///////////////////////////////////////////////
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((form) => {

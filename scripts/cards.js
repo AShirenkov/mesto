@@ -43,10 +43,6 @@ export class Card {
     this._likeCardButton.addEventListener('click', () => {
       this._likeBtnClick();
     });
-
-    /*popupCloseButton.addEventListener('click', () => {
-      this._handleClosePopup();
-    });*/
   }
 
   createCard() {
