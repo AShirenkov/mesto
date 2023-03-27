@@ -1,36 +1,41 @@
-const editProfileButton = document.querySelector('.profile__edit-button');
-const currentName = document.querySelector('.profile__name');
-const currentDescriprion = document.querySelector('.profile__descr');
+export const editProfileButton = document.querySelector(
+  '.profile__edit-button'
+);
+export const currentName = document.querySelector('.profile__name');
+export const currentDescriprion = document.querySelector('.profile__descr');
 
-const popupProfile = document.querySelector('.popup_type_profile');
+export const popupProfile = document.querySelector('.popup_type_profile');
 
-const formEditProfile = document.forms.formEditProfile;
-const popupProfileName = formEditProfile.elements.nameProfile;
-const popupProfileDescription = formEditProfile.elements.descriptionProfile;
+export const formEditProfile = document.forms.formEditProfile;
+export const popupProfileName = formEditProfile.elements.nameProfile;
+export const popupProfileDescription =
+  formEditProfile.elements.descriptionProfile;
 
-const popupProfileSaveButton = popupProfile.querySelector(
+export const popupProfileSaveButton = popupProfile.querySelector(
   '.popup__save-button'
 );
 
-const popupCard = document.querySelector('.popup_type_card');
-const formAddCard = document.forms.formAddCard;
+export const popupCard = document.querySelector('.popup_type_card');
+export const formAddCard = document.forms.formAddCard;
 
-const popupCardNamePlace = formAddCard.elements.namePlace;
-const popupCardUrlPlace = formAddCard.elements.urlPlace;
+export const popupCardNamePlace = formAddCard.elements.namePlace;
+export const popupCardUrlPlace = formAddCard.elements.urlPlace;
 
-const addCardButton = document.querySelector('.profile__card-add-button');
+export const addCardButton = document.querySelector(
+  '.profile__card-add-button'
+);
 
-const cardsContainer = document.querySelector('.cards');
+export const cardsContainer = document.querySelector('.cards');
 
-const popupImg = document.querySelector('.popup_type_img');
-const popupImgPicture = popupImg.querySelector('.popup__card-img');
-const popupImgText = popupImg.querySelector('.popup__text-img');
+export const popupImg = document.querySelector('.popup_type_img');
+export const popupImgPicture = popupImg.querySelector('.popup__card-img');
+export const popupImgText = popupImg.querySelector('.popup__text-img');
 
-const cardTemplate = document
+export const cardTemplate = document
   .querySelector('#cardTemplate')
   .content.querySelector('.card');
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
@@ -56,3 +61,13 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
   },
 ];
+
+export const validationConfig = {
+  formSelector: '.popup__edit-form',
+  inputSelector: '.popup__input-text',
+  errorClassTemplate: '.popup__input-text-error_type_',
+  inputErrorClass: 'popup__input-text-error_active',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputTextClassError: 'popup__input-text_type_error',
+};

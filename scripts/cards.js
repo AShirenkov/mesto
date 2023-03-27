@@ -1,4 +1,6 @@
-class Card {
+import { popupImgPicture, popupImgText, popupImg } from './constants.js';
+
+export class Card {
   constructor(dataCard, templateSelector) {
     this._name = dataCard.name;
     this._link = dataCard.link;
@@ -22,7 +24,6 @@ class Card {
   }
   _openPopupImg() {
     popupImgPicture.src = this._link;
-    console.log(this._link);
     popupImgPicture.alt = this._name;
     popupImgText.textContent = this._name;
     popupImg.classList.add('popup_opened');
