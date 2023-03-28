@@ -16,10 +16,10 @@ export class Card {
 
     return cardElement;
   }
-  _likeBtnClick() {
+  _toggleLike() {
     this._likeCardButton.classList.toggle('card__like_active');
   }
-  _removeCardBtnClick() {
+  _removeCard() {
     this._newCard.remove();
   }
   _openPopupImg() {
@@ -36,12 +36,12 @@ export class Card {
 
     this._removeCardButton = this._newCard.querySelector('.card__trash-button');
     this._removeCardButton.addEventListener('click', () => {
-      this._removeCardBtnClick();
+      this._removeCard();
     });
 
     this._likeCardButton = this._newCard.querySelector('.card__like');
     this._likeCardButton.addEventListener('click', () => {
-      this._likeBtnClick();
+      this._toggleLike();
     });
   }
 
