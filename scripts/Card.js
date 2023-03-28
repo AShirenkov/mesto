@@ -1,10 +1,3 @@
-/*import {
-  popupImgPicture,
-  popupImgText,
-  popupImg,
-  popupCard,
-} from './constants.js';*/
-
 export class Card {
   constructor(dataCard, templateSelector, openPopupImg) {
     this._name = dataCard.name;
@@ -28,13 +21,6 @@ export class Card {
   _removeCard() {
     this._newCard.remove();
   }
-  /*_openPopupImg() {
-    popupImgPicture.src = this._link;
-    popupImgPicture.alt = this._name;
-    popupImgText.textContent = this._name;
-    // popupImg.classList.add('popup_opened');
-    this._openPopup(popupImg);
-  }*/
 
   _setEventListeners() {
     this._cardImg.addEventListener('click', () => {

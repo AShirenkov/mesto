@@ -18,6 +18,8 @@ import {
   popupImgPicture,
   popupImgText,
   popupImg,
+  formAddCard,
+  formEditProfile,
 } from './constants.js';
 /*Функции закрытия попапа по нажатию кнопки крестик*/
 
@@ -45,7 +47,7 @@ const closePopup = (popup) => {
 const popups = document.querySelectorAll('.popup');
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    //Отличная идея со всплытием события и обработкой двух действий в родительском объекте
+    //Всплытие события и обработка двух действий в родительском объекте
     if (
       evt.target === evt.currentTarget ||
       evt.target.classList.contains('popup__close-button')
@@ -66,12 +68,15 @@ const openPopup = (popup) => {
 const openPopupProfile = () => {
   popupProfileName.value = currentName.textContent;
   popupProfileDescription.value = currentDescriprion.textContent;
+  formValidators[formEditProfile.getAttribute('name')].resetValidation();
 
   openPopup(popupProfile);
 };
 
 /*Функция открытия окна добавления новой карточки*/
 const openPopupAddCard = () => {
+  //formAddCard.reset(); // сделал разное поведение и для окна добавлениея карточки решил ничего не сбрасывать, т.к. ввод URL сложный можно промахнутсья кликая мышкой или нажимая случайно Esc
+  //formValidators[formAddCard.getAttribute('name')].resetValidation();
   openPopup(popupCard);
 };
 
@@ -85,12 +90,6 @@ const openPopupImg = (src, name) => {
 
 editProfileButton.addEventListener('click', openPopupProfile);
 addCardButton.addEventListener('click', openPopupAddCard);
-
-//блокирование кнопки сохранить по имени формы
-/*const disableButtonByForm = (form) => {
-  const button = form.querySelector(validationConfig.submitButtonSelector);
-  disableButton(button, validationConfig.inactiveButtonClass);
-};*/
 
 const savePopupProfile = (event) => {
   event.preventDefault();
@@ -112,7 +111,6 @@ formEditProfile.addEventListener('submit', savePopupProfile);
 
 const createNewCard = (event) => {
   event.preventDefault();
-  //const newCard = createCard(popupCardNamePlace.value, popupCardUrlPlace.value);
 
   const newCard = createCard({
     name: popupCardNamePlace.value,
@@ -120,6 +118,7 @@ const createNewCard = (event) => {
   });
 
   formAddCard.reset();
+  formValidators[formAddCard.getAttribute('name')].resetValidation();
 
   cardsContainer.prepend(newCard);
 
@@ -129,7 +128,6 @@ const createNewCard = (event) => {
 formAddCard.addEventListener('submit', createNewCard);
 
 initialCards.forEach((item) => {
-  // console.log(item);
   const newCard = createCard(item);
   cardsContainer.append(newCard);
 });
@@ -139,10 +137,13 @@ const checkAndCloseOpenedPopup = () => {
   document.querySelectorAll('.popup_opened').forEach(closePopup); //Временный коммент чтобы не забыть прием. было вот так document.querySelectorAll('.popup_opened').forEach((popupOpened) => {     closePopup(popupOpened); })
 };
 
+const formValidators = {};
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((form) => {
-    const validator = new FormValidator(form, config);
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
     validator.enableValidation();
   });
 };
