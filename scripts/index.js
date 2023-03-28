@@ -96,19 +96,23 @@ const savePopupProfile = (event) => {
   closePopup(popupProfile);
 };
 
+const createCard = (item) => {
+  const card = new Card(item, cardTemplate);
+  const cardElement = card.createCard();
+  return cardElement;
+};
+
 formEditProfile.addEventListener('submit', savePopupProfile);
 
 const createNewCard = (event) => {
   event.preventDefault();
   //const newCard = createCard(popupCardNamePlace.value, popupCardUrlPlace.value);
-  const card = new Card(
-    {
-      name: popupCardNamePlace.value,
-      link: popupCardUrlPlace.value,
-    },
-    cardTemplate
-  );
-  const newCard = card.createCard();
+
+  const newCard = createCard({
+    name: popupCardNamePlace.value,
+    link: popupCardUrlPlace.value,
+  });
+
   formAddCard.reset();
 
   cardsContainer.prepend(newCard);
@@ -119,8 +123,8 @@ const createNewCard = (event) => {
 formAddCard.addEventListener('submit', createNewCard);
 
 initialCards.forEach((item) => {
-  const card = new Card(item, cardTemplate);
-  const newCard = card.createCard();
+  const newCard = createCard(item);
+
   cardsContainer.append(newCard);
 });
 
