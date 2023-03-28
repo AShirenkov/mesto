@@ -99,6 +99,7 @@ const savePopupProfile = (event) => {
 const createCard = (item) => {
   const card = new Card(item, cardTemplate);
   const cardElement = card.createCard();
+
   return cardElement;
 };
 
@@ -124,15 +125,12 @@ formAddCard.addEventListener('submit', createNewCard);
 
 initialCards.forEach((item) => {
   const newCard = createCard(item);
-
   cardsContainer.append(newCard);
 });
 
 /* Проверка наличия открытых окон и закрытие каждого*/
 const checkAndCloseOpenedPopup = () => {
-  document.querySelectorAll('.popup_opened').forEach((popupOpened) => {
-    closePopup(popupOpened);
-  });
+  document.querySelectorAll('.popup_opened').forEach(closePopup); //Временный коммент чтобы не забыть прием. было вот так document.querySelectorAll('.popup_opened').forEach((popupOpened) => {     closePopup(popupOpened); })
 };
 
 const enableValidation = (config) => {
