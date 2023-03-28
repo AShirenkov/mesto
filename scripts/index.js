@@ -72,12 +72,12 @@ const openPopupAddCard = () => {
   openPopup(popupCard);
 };
 
-const openPopupImg = (src, name) => {
-  popupImgPicture.src = src;
-  popupImgPicture.alt = name;
-  popupImgText.textContent = name;
-  openPopup(popupImg);
-};
+// const openPopupImg = (src, name) => {
+//   popupImgPicture.src = src;
+//   popupImgPicture.alt = name;
+//   popupImgText.textContent = name;
+//   openPopup(popupImg);
+// };
 
 editProfileButton.addEventListener('click', openPopupProfile);
 addCardButton.addEventListener('click', openPopupAddCard);
@@ -97,7 +97,8 @@ const savePopupProfile = (event) => {
 };
 
 const createCard = (item) => {
-  const card = new Card(item, cardTemplate);
+  // console.log(cardTemplate);
+  const card = new Card(item, cardTemplate, openPopup);
   const cardElement = card.createCard();
 
   return cardElement;
@@ -124,6 +125,7 @@ const createNewCard = (event) => {
 formAddCard.addEventListener('submit', createNewCard);
 
 initialCards.forEach((item) => {
+  // console.log(item);
   const newCard = createCard(item);
   cardsContainer.append(newCard);
 });
