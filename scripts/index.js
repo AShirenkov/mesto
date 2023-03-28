@@ -35,7 +35,7 @@ const removeEscapeListener = () => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('click', () => closePopup(popup));
+
   removeEscapeListener();
 };
 
