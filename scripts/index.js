@@ -18,7 +18,7 @@ import {
 } from './constants.js';
 /*Функции закрытия попапа по нажатию кнопки крестик*/
 
-const escapeButtonPressed = (evt) => {
+const handleEscape = (evt) => {
   const keyName = evt.key;
 
   if (keyName === 'Escape') {
@@ -27,10 +27,10 @@ const escapeButtonPressed = (evt) => {
 };
 /*Подписка на событие нажатия Escape*/
 const addEscapeListener = () => {
-  document.addEventListener('keydown', escapeButtonPressed);
+  document.addEventListener('keydown', handleEscape);
 };
 const removeEscapeListener = () => {
-  document.removeEventListener('keydown', escapeButtonPressed);
+  document.removeEventListener('keydown', handleEscape);
 };
 
 const closePopup = (popup) => {
