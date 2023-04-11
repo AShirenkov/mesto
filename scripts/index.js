@@ -1,4 +1,5 @@
-import { Card } from './Card.js';
+import Card from './Card.js';
+import Section from './Section.js';
 import { FormValidator } from './FormValidator.js';
 import {
   validationConfig,
