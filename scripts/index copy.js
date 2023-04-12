@@ -99,14 +99,14 @@ const savePopupProfile = (event) => {
 
   closePopup(popupProfile);
 };
-/*
+
 const createCard = (item) => {
   // console.log(cardTemplate);
   const card = new Card(item, cardTemplate, openPopupImg);
   const cardElement = card.createCard();
 
   return cardElement;
-};*/
+};
 
 formEditProfile.addEventListener('submit', savePopupProfile);
 
@@ -127,12 +127,11 @@ const createNewCard = (event) => {
 };
 
 formAddCard.addEventListener('submit', createNewCard);
-//данный участок не нужен. связали
-/*
+
 initialCards.forEach((item) => {
   const newCard = createCard(item);
   cardsContainer.append(newCard);
-});*/
+});
 
 /* Проверка наличия открытых окон и закрытие каждого*/
 const checkAndCloseOpenedPopup = () => {
@@ -150,17 +149,3 @@ const enableValidation = (config) => {
   });
 };
 enableValidation(validationConfig);
-
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, cardTemplate, openPopupImg);
-      const cardElement = card.createCard();
-      cardList.addItem(cardElement);
-    },
-  },
-  cardsContainer
-);
-
-cardList.renderItems();
