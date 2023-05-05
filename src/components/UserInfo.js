@@ -4,21 +4,20 @@ export default class UserInfo {
 
     this._userDescriptionSelector = data.userDescription;
     this._currentUserInfo = {};
+    this._userName = document.querySelector(this._userNameSelector);
+    this._userDescription = document.querySelector(
+      this._userDescriptionSelector
+    );
   }
 
   getUserInfo() {
-    this._currentUserInfo.name = document.querySelector(
-      this._userNameSelector
-    ).textContent;
-    this._currentUserInfo.description = document.querySelector(
-      this._userDescriptionSelector
-    ).textContent;
+    this._currentUserInfo.name = this._userName.textContent;
+    this._currentUserInfo.description = this._userDescription.textContent;
 
     return this._currentUserInfo;
   }
   setUserInfo(name, description) {
-    document.querySelector(this._userNameSelector).textContent = name;
-    document.querySelector(this._userDescriptionSelector).textContent =
-      description;
+    this._userName.textContent = name;
+    this._userDescription.textContent = description;
   }
 }
