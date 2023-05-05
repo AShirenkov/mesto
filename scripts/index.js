@@ -1,6 +1,5 @@
 import Card from './Card.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
 import PopupWithForm from './PopupWithForm.js';
 import PopupWithImage from './PopupWithImage.js';
 import UserInfo from './UserInfo.js';
@@ -11,21 +10,11 @@ import {
   editProfileButton,
   addCardButton,
   cardTemplate,
-  cardsContainer,
   cardsSelector,
-  popupCard,
   popupCardSelector,
-  popupProfile,
   popupProfileName,
   popupProfileDescription,
   popupUserSelector,
-  currentName,
-  currentDescriprion,
-  popupCardNamePlace,
-  popupCardUrlPlace,
-  popupImgPicture,
-  popupImgText,
-  popupImg,
   popupImgSelector,
   formAddCard,
   formEditProfile,
