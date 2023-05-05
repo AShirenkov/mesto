@@ -1,9 +1,9 @@
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
-import { FormValidator } from './components/FormValidator.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import { FormValidator } from '../components/FormValidator.js';
 import {
   validationConfig,
   initialCards,
@@ -18,8 +18,8 @@ import {
   popupImgSelector,
   formAddCard,
   formEditProfile,
-} from './utils/constants.js';
-import './pages/index.css';
+} from '../utils/constants.js';
+import './index.css';
 
 /*Функция открытия окна с параметрами пользователя*/
 const openPopupProfile = () => {

@@ -5,12 +5,12 @@ export default class Popup {
   }
 
   open() {
-    this._addEscapeListener();
+    window.addEventListener('keydown', this._handleEscClose);
     this._popupElement.classList.add('popup_opened');
   }
   close() {
     this._popupElement.classList.remove('popup_opened');
-    this._removeEscapeListener();
+    window.removeEventListener('keydown', this._handleEscClose);
   }
   _handleEscClose = (evt) => {
     //закрытие по Esc
@@ -19,13 +19,6 @@ export default class Popup {
     if (keyName === 'Escape') {
       this.close();
     }
-  };
-
-  _addEscapeListener = () => {
-    window.addEventListener('keydown', this._handleEscClose);
-  };
-  _removeEscapeListener = () => {
-    window.removeEventListener('keydown', this._handleEscClose);
   };
 
   setEventListeners() {
