@@ -1,36 +1,20 @@
 export const editProfileButton = document.querySelector(
   '.profile__edit-button'
 );
-export const currentName = document.querySelector('.profile__name');
-export const currentDescriprion = document.querySelector('.profile__descr');
 
-export const popupProfile = document.querySelector('.popup_type_profile');
-
+export const popupUserSelector = '.popup_type_profile';
 export const formEditProfile = document.forms.formEditProfile;
 export const popupProfileName = formEditProfile.elements.nameProfile;
 export const popupProfileDescription =
   formEditProfile.elements.descriptionProfile;
-
-export const popupProfileSaveButton = popupProfile.querySelector(
-  '.popup__save-button'
-);
-
-export const popupCard = document.querySelector('.popup_type_card');
 export const formAddCard = document.forms.formAddCard;
-
-export const popupCardNamePlace = formAddCard.elements.namePlace;
-export const popupCardUrlPlace = formAddCard.elements.urlPlace;
-
+export const popupCardSelector = '.popup_type_card';
 export const addCardButton = document.querySelector(
   '.profile__card-add-button'
 );
 
-export const cardsContainer = document.querySelector('.cards');
-
-export const popupImg = document.querySelector('.popup_type_img');
-export const popupImgPicture = popupImg.querySelector('.popup__card-img');
-export const popupImgText = popupImg.querySelector('.popup__text-img');
-
+export const cardsSelector = '.cards';
+export const popupImgSelector = '.popup_type_img';
 export const cardTemplate = document
   .querySelector('#cardTemplate')
   .content.querySelector('.card');
