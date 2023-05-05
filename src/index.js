@@ -19,6 +19,7 @@ import {
   formAddCard,
   formEditProfile,
 } from './utils/constants.js';
+import './pages/index.css';
 
 /*Функция открытия окна с параметрами пользователя*/
 const openPopupProfile = () => {
