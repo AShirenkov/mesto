@@ -1,5 +1,9 @@
 import Card from './Card.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
+import PopupWithForm from './PopupWithForm.js';
+import PopupWithImage from './PopupWithImage.js';
+import UserInfo from './UserInfo.js';
 import { FormValidator } from './FormValidator.js';
 import {
   validationConfig,
@@ -8,10 +12,13 @@ import {
   addCardButton,
   cardTemplate,
   cardsContainer,
+  cardsSelector,
   popupCard,
+  popupCardSelector,
   popupProfile,
   popupProfileName,
   popupProfileDescription,
+  popupUserSelector,
   currentName,
   currentDescriprion,
   popupCardNamePlace,
@@ -19,125 +26,31 @@ import {
   popupImgPicture,
   popupImgText,
   popupImg,
+  popupImgSelector,
   formAddCard,
   formEditProfile,
 } from './constants.js';
-/*Функции закрытия попапа по нажатию кнопки крестик*/
-
-const handleEscape = (evt) => {
-  const keyName = evt.key;
-
-  if (keyName === 'Escape') {
-    checkAndCloseOpenedPopup();
-  }
-};
-/*Подписка на событие нажатия Escape*/
-const addEscapeListener = () => {
-  document.addEventListener('keydown', handleEscape);
-};
-const removeEscapeListener = () => {
-  document.removeEventListener('keydown', handleEscape);
-};
-
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-
-  removeEscapeListener();
-};
-
-const popups = document.querySelectorAll('.popup');
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    //Всплытие события и обработка двух действий в родительском объекте
-    if (
-      evt.target === evt.currentTarget ||
-      evt.target.classList.contains('popup__close-button')
-    ) {
-      closePopup(popup);
-    }
-  });
-});
-
-/*Функция открытия произвольного попапа*/
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-
-  addEscapeListener();
-};
 
 /*Функция открытия окна с параметрами пользователя*/
 const openPopupProfile = () => {
-  popupProfileName.value = currentName.textContent;
-  popupProfileDescription.value = currentDescriprion.textContent;
+  const { name, description } = user.getUserInfo();
+
+  popupProfileName.value = name;
+  popupProfileDescription.value = description;
+
   formValidators[formEditProfile.getAttribute('name')].resetValidation();
 
-  openPopup(popupProfile);
+  popupUserInfo.open();
 };
 
 /*Функция открытия окна добавления новой карточки*/
 const openPopupAddCard = () => {
-  //formAddCard.reset(); // сделал разное поведение и для окна добавлениея карточки решил ничего не сбрасывать, т.к. ввод URL сложный можно промахнутсья кликая мышкой или нажимая случайно Esc
-  //formValidators[formAddCard.getAttribute('name')].resetValidation();
-  openPopup(popupCard);
-};
-
-const openPopupImg = (src, name) => {
-  popupImgPicture.src = src;
-
-  popupImgPicture.alt = name;
-  popupImgText.textContent = name;
-  openPopup(popupImg);
-};
-
-editProfileButton.addEventListener('click', openPopupProfile);
-addCardButton.addEventListener('click', openPopupAddCard);
-
-const savePopupProfile = (event) => {
-  event.preventDefault();
-  currentName.textContent = popupProfileName.value;
-  currentDescriprion.textContent = popupProfileDescription.value;
-
-  closePopup(popupProfile);
-};
-/*
-const createCard = (item) => {
-  // console.log(cardTemplate);
-  const card = new Card(item, cardTemplate, openPopupImg);
-  const cardElement = card.createCard();
-
-  return cardElement;
-};*/
-
-formEditProfile.addEventListener('submit', savePopupProfile);
-
-const createNewCard = (event) => {
-  event.preventDefault();
-
-  const newCard = createCard({
-    name: popupCardNamePlace.value,
-    link: popupCardUrlPlace.value,
-  });
-
-  formAddCard.reset();
+  popupAddCard.open();
   formValidators[formAddCard.getAttribute('name')].resetValidation();
-
-  cardsContainer.prepend(newCard);
-
-  closePopup(popupCard);
 };
 
-formAddCard.addEventListener('submit', createNewCard);
-//данный участок не нужен. связали
-/*
-initialCards.forEach((item) => {
-  const newCard = createCard(item);
-  cardsContainer.append(newCard);
-});*/
-
-/* Проверка наличия открытых окон и закрытие каждого*/
-const checkAndCloseOpenedPopup = () => {
-  document.querySelectorAll('.popup_opened').forEach(closePopup); //Временный коммент чтобы не забыть прием. было вот так document.querySelectorAll('.popup_opened').forEach((popupOpened) => {     closePopup(popupOpened); })
-};
+editProfileButton.addEventListener('click', openPopupProfile); //слушатели элементов на странице
+addCardButton.addEventListener('click', openPopupAddCard); //слушатели элементов на странице
 
 const formValidators = {};
 const enableValidation = (config) => {
@@ -151,16 +64,52 @@ const enableValidation = (config) => {
 };
 enableValidation(validationConfig);
 
+//Создаем экземпляр класса для окна карточки
+const popupCardImage = new PopupWithImage(popupImgSelector);
+popupCardImage.setEventListeners();
+
+//Заполняем страницу предустановленными карточками
 const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, cardTemplate, openPopupImg);
+      const card = new Card(item, cardTemplate, popupCardImage.open);
       const cardElement = card.createCard();
+
       cardList.addItem(cardElement);
     },
   },
-  cardsContainer
+  cardsSelector
 );
 
 cardList.renderItems();
+
+//Создаем экземпляр класса для записи/чтения данных пользователя
+const user = new UserInfo({
+  userName: '.profile__name',
+  userDescription: '.profile__descr',
+});
+
+//callBack функция для попапа добавления новой карточки
+const createNewCard = (formValues) => {
+  const card = new Card(
+    { name: formValues['namePlace'], link: formValues['urlPlace'] },
+    cardTemplate,
+    popupCardImage.open
+  );
+
+  const cardElement = card.createCard();
+  cardList.addItem(cardElement);
+};
+//Создаем экземпляр класса для добавления новых карточек
+const popupAddCard = new PopupWithForm(popupCardSelector, createNewCard);
+popupAddCard.setEventListeners();
+
+//callBack функция для попапа редактирования профиля
+const setUserInfo = (formValues) => {
+  user.setUserInfo(formValues['nameProfile'], formValues['descriptionProfile']);
+};
+
+//Создаем экземпляр класса для редактирвоания профиля пользователя
+const popupUserInfo = new PopupWithForm(popupUserSelector, setUserInfo);
+popupUserInfo.setEventListeners();

@@ -5,6 +5,7 @@ export const currentName = document.querySelector('.profile__name');
 export const currentDescriprion = document.querySelector('.profile__descr');
 
 export const popupProfile = document.querySelector('.popup_type_profile');
+export const popupUserSelector = '.popup_type_profile';
 
 export const formEditProfile = document.forms.formEditProfile;
 export const popupProfileName = formEditProfile.elements.nameProfile;
@@ -17,6 +18,7 @@ export const popupProfileSaveButton = popupProfile.querySelector(
 
 export const popupCard = document.querySelector('.popup_type_card');
 export const formAddCard = document.forms.formAddCard;
+export const popupCardSelector = '.popup_type_card';
 
 export const popupCardNamePlace = formAddCard.elements.namePlace;
 export const popupCardUrlPlace = formAddCard.elements.urlPlace;
@@ -26,10 +28,13 @@ export const addCardButton = document.querySelector(
 );
 
 export const cardsContainer = document.querySelector('.cards');
+export const cardsSelector = '.cards';
 
 export const popupImg = document.querySelector('.popup_type_img');
 export const popupImgPicture = popupImg.querySelector('.popup__card-img');
 export const popupImgText = popupImg.querySelector('.popup__text-img');
+
+export const popupImgSelector = '.popup_type_img';
 
 export const cardTemplate = document
   .querySelector('#cardTemplate')
