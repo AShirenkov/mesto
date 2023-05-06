@@ -1,9 +1,9 @@
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
-import { FormValidator } from './components/FormValidator.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import { FormValidator } from '../components/FormValidator.js';
 import {
   validationConfig,
   initialCards,
@@ -18,8 +18,8 @@ import {
   popupImgSelector,
   formAddCard,
   formEditProfile,
-} from './utils/constants.js';
-import './pages/index.css';
+} from '../utils/constants.js';
+import './index.css';
 
 /*Функция открытия окна с параметрами пользователя*/
 const openPopupProfile = () => {
@@ -58,15 +58,19 @@ enableValidation(validationConfig);
 const popupCardImage = new PopupWithImage(popupImgSelector);
 popupCardImage.setEventListeners();
 
+//callBack функция для попапа добавления новой карточки
+const createNewCard = (formValues) => {
+  const card = new Card(formValues, cardTemplate, popupCardImage.open);
+
+  const cardElement = card.createCard();
+  cardList.addItem(cardElement);
+};
 //Заполняем страницу предустановленными карточками
 const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, cardTemplate, popupCardImage.open);
-      const cardElement = card.createCard();
-
-      cardList.addItem(cardElement);
+      createNewCard(item);
     },
   },
   cardsSelector
@@ -80,17 +84,6 @@ const user = new UserInfo({
   userDescription: '.profile__descr',
 });
 
-//callBack функция для попапа добавления новой карточки
-const createNewCard = (formValues) => {
-  const card = new Card(
-    { name: formValues['namePlace'], link: formValues['urlPlace'] },
-    cardTemplate,
-    popupCardImage.open
-  );
-
-  const cardElement = card.createCard();
-  cardList.addItem(cardElement);
-};
 //Создаем экземпляр класса для добавления новых карточек
 const popupAddCard = new PopupWithForm(popupCardSelector, createNewCard);
 popupAddCard.setEventListeners();
