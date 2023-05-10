@@ -12,6 +12,7 @@ export const popupCardSelector = '.popup_type_card';
 export const addCardButton = document.querySelector(
   '.profile__card-add-button'
 );
+export const popupRemoveCardSelector = '.popup_type_remove-card';
 
 export const cardsSelector = '.cards';
 export const popupImgSelector = '.popup_type_img';

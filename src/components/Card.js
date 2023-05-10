@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(dataCard, templateSelector, handleCardClick) {
+  constructor(dataCard, templateSelector, handleCardClick, handleCardRemove) {
     this._name = dataCard.name;
     this._link = dataCard.link;
     this._templateSelector = templateSelector;
@@ -8,6 +8,7 @@ export default class Card {
     this._removeCardButton = null;
     this._likeCardButton = null;
     this._handleCardClick = handleCardClick;
+    this._handleCardRemove = handleCardRemove;
   }
 
   _getTemplate() {
@@ -18,7 +19,7 @@ export default class Card {
   _toggleLike() {
     this._likeCardButton.classList.toggle('card__like_active');
   }
-  _removeCard() {
+  removeCard() {
     this._newCard.remove();
   }
 
@@ -28,7 +29,8 @@ export default class Card {
     });
 
     this._removeCardButton.addEventListener('click', () => {
-      this._removeCard();
+      //this._removeCard(); //заменяем на хендлер функции открытия попапа
+      this._handleCardRemove(this._newCard);
     });
 
     this._likeCardButton.addEventListener('click', () => {

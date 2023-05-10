@@ -20,7 +20,7 @@
       <section class="profiles">
         <div class="profile">
           <div class="profile__common">
-            <img src="<%=require('./images/kusto.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+            <img src="<%=require('./images/kusto.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar opacity-button ">
 
             <div class="profile__info">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -60,6 +60,22 @@
         <button type="button" class="popup__close-button opacity-button"></button>
       </div>
     </div>
+
+
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="formEditAvatar" class="popup__edit-form">
+          <input required name="linkAvatar" type="url" placeholder="Ссылка на аватар"
+            class="popup__input-text popup__input-text_type_link-Avatar">
+          <span class="popup__input-text-error popup__input-text-error_type_linkAvatar">Введите адрес картинки</span>
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+
+        <button type="button" class="popup__close-button opacity-button"></button>
+      </div>
+    </div>
+
     <div class="popup popup_type_card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>/
@@ -72,8 +88,18 @@
           <span class="popup__input-text-error popup__input-text-error_type_link">Введите адрес сайта</span>
           <button type="submit" class="popup__save-button opacity-button">Создать</button>
         </form>
+        <button type="button" class="popup__close-button opacity-button"></button>
+      </div>
+    </div>
 
 
+    <div class="popup popup_type_remove-card">
+      <div class="popup__container">
+        <h2 class="popup__title">Вы уверены?</h2>/
+        <form name="formRemoveCard" class="popup__edit-form">
+
+          <button type="submit" class="popup__save-button opacity-button">Да</button>
+        </form>
         <button type="button" class="popup__close-button opacity-button"></button>
       </div>
     </div>
