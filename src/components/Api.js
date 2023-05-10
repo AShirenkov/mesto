@@ -22,6 +22,14 @@ export default class Api {
     );
   }
 
+  setUserInfo(obj) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(obj),
+    }).then(this._resFromServer);
+  }
+
   sendNewCard(obj) {
     //console.log(JSON.stringify(obj));
     return fetch(`${this._baseUrl}/cards`, {

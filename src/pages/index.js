@@ -37,9 +37,10 @@ const api = new Api({
 Promise.resolve(api.getMyUser())
   .then((values) => {
     //initialCards = values;
-    console.log(values);
+    //console.log(values);
     //cardList.renderItems(values);
-    user.setUserInfo(values['name'], values['about'], values['_id']);
+    user.setUserInfo(values);
+    user.setUserId(values['_id']);
   })
   .catch((err) => {
     console.log(err);
@@ -170,6 +171,23 @@ const setUserInfo = (formValues) => {
   user.setUserInfo(formValues['nameProfile'], formValues['descriptionProfile']);
 };
 
+const handleSetUserInfo = (formValues) => {
+  const objUser = {
+    name: formValues['nameProfile'],
+    about: formValues['descriptionProfile'],
+  };
+  console.log(objUser);
+  api
+    .setUserInfo(objUser)
+    .then((values) => {
+      console.log('z nen');
+      user.setUserInfo(values);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 //Создаем экземпляр класса для редактирвоания профиля пользователя
-const popupUserInfo = new PopupWithForm(popupUserSelector, setUserInfo);
+const popupUserInfo = new PopupWithForm(popupUserSelector, handleSetUserInfo);
 popupUserInfo.setEventListeners();
