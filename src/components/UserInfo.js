@@ -3,12 +3,14 @@ export default class UserInfo {
     this._userNameSelector = data.userName;
 
     this._userDescriptionSelector = data.userDescription;
+    this._userAvatarSelector = data.userAvatar;
+
     this._currentUserInfo = {};
     this._userName = document.querySelector(this._userNameSelector);
     this._userDescription = document.querySelector(
       this._userDescriptionSelector
     );
-
+    this._userAvatar = document.querySelector(this._userAvatarSelector);
     this._UserId = null;
   }
 
@@ -18,14 +20,20 @@ export default class UserInfo {
 
     return this._currentUserInfo;
   }
-
-  setUserInfo(data) {
-    this._userName.textContent = data.name;
-    this._userDescription.textContent = data.about;
-    this._setUserId(data._id);
+  //this._profileAvatarElement.style.backgroundImage = `url(${url})`;
+  setUserInfo(objResponse) {
+    this._userName.textContent = objResponse.name;
+    this._userDescription.textContent = objResponse.about;
+    this._setUserId(objResponse._id);
     //console.log(`id=${data._id}`);
-    this.setAvatarPic(data.avatar);
+    this.setAvatarPic(objResponse.avatar);
   }
   getUserId = () => this._UserId;
   _setUserId = (id) => (this._UserId = id);
+  setAvatarPic(avatar) {
+    this._userAvatar.style.backgroundImage = `url(${avatar})`;
+    //https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg//ссылка для отката на старую аватарку
+
+    console.log(avatar);
+  }
 }

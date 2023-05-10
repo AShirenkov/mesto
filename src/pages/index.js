@@ -10,6 +10,7 @@ import {
   validationConfig,
   //initialCards,
   editProfileButton,
+  editAvatarButton,
   addCardButton,
   cardTemplate,
   cardsSelector,
@@ -18,8 +19,10 @@ import {
   popupProfileDescription,
   popupUserSelector,
   popupImgSelector,
+  popupAvatarSelector,
   formAddCard,
   formEditProfile,
+  formEditAvatar,
   popupRemoveCardSelector,
 } from '../utils/constants.js';
 import './index.css';
@@ -67,7 +70,12 @@ const openPopupProfile = () => {
 
   popupUserInfo.open();
 };
+/*Функция открытия окна обновления аватара*/
+const openPopupAvatar = () => {
+  formValidators[formEditAvatar.getAttribute('name')].resetValidation();
 
+  popupUserAvatar.open();
+};
 /*Функция открытия окна добавления новой карточки*/
 const openPopupAddCard = () => {
   popupAddCard.open();
@@ -75,6 +83,7 @@ const openPopupAddCard = () => {
 };
 
 editProfileButton.addEventListener('click', openPopupProfile); //слушатели элементов на странице
+editAvatarButton.addEventListener('click', openPopupAvatar); //слушатели элементов на странице
 addCardButton.addEventListener('click', openPopupAddCard); //слушатели элементов на странице
 
 const formValidators = {};
@@ -160,6 +169,7 @@ const cardList = new Section(
 const user = new UserInfo({
   userName: '.profile__name',
   userDescription: '.profile__descr',
+  userAvatar: '.profile__avatar-button',
 });
 
 //Создаем экземпляр класса для добавления новых карточек
@@ -176,11 +186,25 @@ const handleSetUserInfo = (formValues) => {
     name: formValues['nameProfile'],
     about: formValues['descriptionProfile'],
   };
-  console.log(objUser);
+
   api
     .setUserInfo(objUser)
     .then((values) => {
-      console.log('z nen');
+      user.setUserInfo(values);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const handleSetUserAvatar = (formValues) => {
+  const objAvatar = {
+    avatar: formValues['linkAvatar'],
+  };
+
+  api
+    .setUserAvatar(objAvatar)
+    .then((values) => {
       user.setUserInfo(values);
     })
     .catch((err) => {
@@ -191,3 +215,10 @@ const handleSetUserInfo = (formValues) => {
 //Создаем экземпляр класса для редактирвоания профиля пользователя
 const popupUserInfo = new PopupWithForm(popupUserSelector, handleSetUserInfo);
 popupUserInfo.setEventListeners();
+
+//Создаем экземпляр класса для редактирвоания аватара пользователя
+const popupUserAvatar = new PopupWithForm(
+  popupAvatarSelector,
+  handleSetUserAvatar
+);
+popupUserAvatar.setEventListeners();
