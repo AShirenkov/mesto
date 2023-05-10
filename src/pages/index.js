@@ -39,7 +39,7 @@ Promise.resolve(api.getMyUser())
     //initialCards = values;
     console.log(values);
     //cardList.renderItems(values);
-    user.setUserInfo(values['name'], values['about']);
+    user.setUserInfo(values['name'], values['about'], values['_id']);
   })
   .catch((err) => {
     console.log(err);
@@ -97,17 +97,56 @@ popupCardImage.setEventListeners();
 //popupConfirm.setEventListeners();
 
 //callBack функция для попапа добавления новой карточки
-const createNewCard = (formValues) => {
-  const card = new Card(formValues, cardTemplate, popupCardImage.open);
+const handleNewCard = (formValues) => {
+  //console.log(user.getUserId());
+
+  const userId = user.getUserId();
+  const card = new Card(
+    formValues,
+    userId,
+    cardTemplate,
+    popupCardImage.open,
+    handleRemoveCardServer
+  );
 
   const cardElement = card.createCard();
   cardList.addItem(cardElement);
 };
+
+//Функция  для сабмита формы для добавления карточке с запросом на сервер
+
+const handleNewCardServer = (formValues) => {
+  api
+    .sendNewCard(formValues)
+    .then(
+      /*(res) => {
+      const card = new Card(res, cardTemplate, popupCardImage.open);
+      const cardElement = card.createCard();
+      cardList.addItem(cardElement);
+    }*/
+      handleNewCard
+    )
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//Функция удаления объекта по его ID
+
+const handleRemoveCardServer = (card) => {
+  api
+    .removeCard(card._id)
+    .then(card.removeCard())
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 //Заполняем страницу предустановленными карточками
 const cardList = new Section(
   {
     renderer: (item) => {
-      createNewCard(item);
+      handleNewCard(item);
     },
   },
 
@@ -123,7 +162,7 @@ const user = new UserInfo({
 });
 
 //Создаем экземпляр класса для добавления новых карточек
-const popupAddCard = new PopupWithForm(popupCardSelector, createNewCard);
+const popupAddCard = new PopupWithForm(popupCardSelector, handleNewCardServer);
 popupAddCard.setEventListeners();
 
 //callBack функция для попапа редактирования профиля

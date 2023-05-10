@@ -8,6 +8,8 @@ export default class UserInfo {
     this._userDescription = document.querySelector(
       this._userDescriptionSelector
     );
+
+    this._UserId = null;
   }
 
   getUserInfo() {
@@ -16,8 +18,10 @@ export default class UserInfo {
 
     return this._currentUserInfo;
   }
-  setUserInfo(name, description) {
+  setUserInfo(name, description, id) {
     this._userName.textContent = name;
     this._userDescription.textContent = description;
+    this._UserId = id;
   }
+  getUserId = () => this._UserId;
 }
