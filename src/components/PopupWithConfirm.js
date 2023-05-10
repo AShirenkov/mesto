@@ -8,16 +8,16 @@ export default class PopupWithConfirm extends Popup {
     this._inputList = this._form.querySelectorAll('.popup__input-text');
   }
 
-  open(handler) {
+  open = (obj) => {
     super.open();
-    this._handleFormSubmit = handler;
-  }
+    this._objForSubmit = obj;
+  };
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
+      this._handleFormSubmit(this._objForSubmit);
       this.close();
 
       //this._form.reset();

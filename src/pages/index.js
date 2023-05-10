@@ -116,7 +116,7 @@ const handleNewCard = (formValues) => {
     userId,
     cardTemplate,
     popupCardImage.open,
-    handleRemoveCardServer
+    popupRemoveCard.open
   );
 
   const cardElement = card.createCard();
@@ -136,17 +136,6 @@ const handleNewCardServer = (formValues) => {
     }*/
       handleNewCard
     )
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-//Функция удаления объекта по его ID
-
-const handleRemoveCardServer = (card) => {
-  api
-    .removeCard(card._id)
-    .then(card.removeCard())
     .catch((err) => {
       console.log(err);
     });
@@ -222,3 +211,21 @@ const popupUserAvatar = new PopupWithForm(
   handleSetUserAvatar
 );
 popupUserAvatar.setEventListeners();
+
+//Функция удаления объекта по его ID
+
+const handleRemoveCardServer = (card) => {
+  api
+    .removeCard(card._id)
+    .then(card.removeCard())
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//Создаем экземпляр класса для редактирвоания профиля пользователя
+const popupRemoveCard = new PopupWithConfirm(
+  popupRemoveCardSelector,
+  handleRemoveCardServer
+);
+popupRemoveCard.setEventListeners();

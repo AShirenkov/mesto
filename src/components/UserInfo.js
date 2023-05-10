@@ -33,7 +33,6 @@ export default class UserInfo {
   setAvatarPic(avatar) {
     this._userAvatar.style.backgroundImage = `url(${avatar})`;
     //https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg//ссылка для отката на старую аватарку
-
-    console.log(avatar);
+    //https://klike.net/uploads/posts/2019-03/1551514046_26.jpg
   }
 }
