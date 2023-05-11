@@ -8,7 +8,6 @@ import { FormValidator } from '../components/FormValidator.js';
 import Api from '../components/Api.js';
 import {
   validationConfig,
-  //initialCards,
   editProfileButton,
   editAvatarButton,
   addCardButton,
@@ -36,12 +35,9 @@ const api = new Api({
 });
 
 //считываем список карточек с сервера
-//const initialCards = null;
+
 Promise.resolve(api.getMyUser())
   .then((values) => {
-    //initialCards = values;
-    //console.log(values);
-    //cardList.renderItems(values);
     user.setUserInfo(values);
     user.setUserId(values['_id']);
   })
@@ -51,8 +47,6 @@ Promise.resolve(api.getMyUser())
 
 Promise.resolve(api.getInitialCards())
   .then((values) => {
-    //initialCards = values;
-    //console.log(values);
     cardList.renderItems(values);
   })
   .catch((err) => {
@@ -104,8 +98,6 @@ popupCardImage.setEventListeners();
 
 //callBack функция для попапа добавления новой карточки
 const handleNewCard = (formValues) => {
-  //console.log(user.getUserId());
-
   const userId = user.getUserId();
   const card = new Card(
     formValues,
@@ -123,11 +115,15 @@ const handleNewCard = (formValues) => {
 //Функция  для сабмита формы для добавления карточке с запросом на сервер
 
 const handleNewCardServer = (formValues) => {
+  popupAddCard.toggleSubmitButtonDescription();
   api
     .sendNewCard(formValues)
     .then(handleNewCard)
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupAddCard.toggleSubmitButtonDescription();
     });
 };
 
@@ -142,8 +138,6 @@ const cardList = new Section(
   cardsSelector
 );
 
-//cardList.renderItems();
-
 //Создаем экземпляр класса для записи/чтения данных пользователя
 const user = new UserInfo({
   userName: '.profile__name',
@@ -156,15 +150,13 @@ const popupAddCard = new PopupWithForm(popupCardSelector, handleNewCardServer);
 popupAddCard.setEventListeners();
 
 //callBack функция для попапа редактирования профиля
-const setUserInfo = (formValues) => {
-  user.setUserInfo(formValues['nameProfile'], formValues['descriptionProfile']);
-};
 
 const handleSetUserInfo = (formValues) => {
   const objUser = {
     name: formValues['nameProfile'],
     about: formValues['descriptionProfile'],
   };
+  popupUserInfo.toggleSubmitButtonDescription();
 
   api
     .setUserInfo(objUser)
@@ -173,6 +165,9 @@ const handleSetUserInfo = (formValues) => {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupUserInfo.toggleSubmitButtonDescription();
     });
 };
 
@@ -180,7 +175,7 @@ const handleSetUserAvatar = (formValues) => {
   const objAvatar = {
     avatar: formValues['linkAvatar'],
   };
-
+  popupUserAvatar.toggleSubmitButtonDescription();
   api
     .setUserAvatar(objAvatar)
     .then((values) => {
@@ -188,6 +183,9 @@ const handleSetUserAvatar = (formValues) => {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupUserAvatar.toggleSubmitButtonDescription();
     });
 };
 

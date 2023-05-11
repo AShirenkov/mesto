@@ -20,7 +20,7 @@ export default class UserInfo {
 
     return this._currentUserInfo;
   }
-  //this._profileAvatarElement.style.backgroundImage = `url(${url})`;
+
   setUserInfo(objResponse) {
     this._userName.textContent = objResponse.name;
     this._userDescription.textContent = objResponse.about;

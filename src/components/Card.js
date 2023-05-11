@@ -25,6 +25,7 @@ export default class Card {
     this._removeCardButton = null;
 
     this._likeCardButton = null;
+    this._likeCardCount = null;
     this._handleCardClick = handleCardClick;
     this._handleCardRemove = handleCardRemove;
     this._handleLikeClick = handleLikeClick;
@@ -50,6 +51,7 @@ export default class Card {
     this._isliked = Boolean(
       objCardLikes.find((item) => item._id === this._userId)
     );
+    this._likeCardCount.textContent = objCardLikes.length;
   }
   _isOwner() {
     return this._userId === this._ownerId;
@@ -61,9 +63,7 @@ export default class Card {
     });
 
     if (isOwner) {
-      //console.log('моя');
       this._removeCardButton.addEventListener('click', () => {
-        //this._removeCard(); //заменяем на хендлер функции открытия попапа
         this._handleCardRemove(this);
       });
     } else {
@@ -80,12 +80,13 @@ export default class Card {
   createCard() {
     this._newCard = this._getTemplate();
 
-    this._cardTitle = this._newCard.querySelector('.card__title'); //+
+    this._cardTitle = this._newCard.querySelector('.card__title');
     this._cardTitle.textContent = this._name;
 
     this._cardImg = this._newCard.querySelector('.card__img');
     this._removeCardButton = this._newCard.querySelector('.card__trash-button');
     this._likeCardButton = this._newCard.querySelector('.card__like');
+    this._likeCardCount = this._newCard.querySelector('.card__like-count');
 
     this._cardImg.src = this._link;
     this._cardImg.alt = this._name;
