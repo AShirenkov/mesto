@@ -52,4 +52,17 @@ export default class Api {
       headers: this._headers,
     }).then(this._resFromServer);
   }
+
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then(this._resFromServer);
+  }
+  setLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    }).then(this._resFromServer);
+  }
 }

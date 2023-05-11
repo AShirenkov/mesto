@@ -102,10 +102,6 @@ enableValidation(validationConfig);
 const popupCardImage = new PopupWithImage(popupImgSelector);
 popupCardImage.setEventListeners();
 
-//Создаем экземпляр класса для окна подтверждения удаления карточки
-//const popupConfirm = new PopupWithConfirm(popupRemoveCardSelector, setUserInfo);
-//popupConfirm.setEventListeners();
-
 //callBack функция для попапа добавления новой карточки
 const handleNewCard = (formValues) => {
   //console.log(user.getUserId());
@@ -116,7 +112,8 @@ const handleNewCard = (formValues) => {
     userId,
     cardTemplate,
     popupCardImage.open,
-    popupRemoveCard.open
+    popupRemoveCard.open,
+    handleLikeClick
   );
 
   const cardElement = card.createCard();
@@ -128,14 +125,7 @@ const handleNewCard = (formValues) => {
 const handleNewCardServer = (formValues) => {
   api
     .sendNewCard(formValues)
-    .then(
-      /*(res) => {
-      const card = new Card(res, cardTemplate, popupCardImage.open);
-      const cardElement = card.createCard();
-      cardList.addItem(cardElement);
-    }*/
-      handleNewCard
-    )
+    .then(handleNewCard)
     .catch((err) => {
       console.log(err);
     });
@@ -229,3 +219,25 @@ const popupRemoveCard = new PopupWithConfirm(
   handleRemoveCardServer
 );
 popupRemoveCard.setEventListeners();
+
+const handleLikeClick = (card) => {
+  if (card._isliked) {
+    api
+      .removeLike(card._id)
+      .then((values) => {
+        card._checkLiked(values.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    api
+      .setLike(card._id)
+      .then((values) => {
+        card._checkLiked(values.likes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+};

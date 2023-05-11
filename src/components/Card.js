@@ -4,7 +4,8 @@ export default class Card {
     userId,
     templateSelector,
     handleCardClick,
-    handleCardRemove
+    handleCardRemove,
+    handleLikeClick
   ) {
     this._name = dataCard.name;
     this._link = dataCard.link;
@@ -14,14 +15,19 @@ export default class Card {
     this._ownerId = dataCard.owner._id;
 
     this._userId = userId;
+    this._arrLikes = dataCard.likes;
+    this._isliked = null;
 
     this._templateSelector = templateSelector;
     this._cardTitle = null;
     this._cardImg = null;
+
     this._removeCardButton = null;
+
     this._likeCardButton = null;
     this._handleCardClick = handleCardClick;
     this._handleCardRemove = handleCardRemove;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -39,19 +45,23 @@ export default class Card {
   removeCard() {
     this._newCard.remove();
   }
-  _isOwner() {
-    console.log(`владелец:${this._ownerId}`);
-    console.log(`я:${this._userId}`);
 
+  _checkLiked(objCardLikes) {
+    this._isliked = Boolean(
+      objCardLikes.find((item) => item._id === this._userId)
+    );
+  }
+  _isOwner() {
     return this._userId === this._ownerId;
   }
+
   _setEventListeners(isOwner) {
     this._cardImg.addEventListener('click', () => {
       this._handleCardClick(this._link, this._name);
     });
 
     if (isOwner) {
-      console.log('моя');
+      //console.log('моя');
       this._removeCardButton.addEventListener('click', () => {
         //this._removeCard(); //заменяем на хендлер функции открытия попапа
         this._handleCardRemove(this);
@@ -61,6 +71,8 @@ export default class Card {
     }
 
     this._likeCardButton.addEventListener('click', () => {
+      this._handleLikeClick(this);
+
       this._toggleLike();
     });
   }
@@ -78,6 +90,9 @@ export default class Card {
     this._cardImg.src = this._link;
     this._cardImg.alt = this._name;
     this._setEventListeners(this._isOwner());
+    this._checkLiked(this._arrLikes);
+    this._isliked ? this._toggleLike() : false;
+
     return this._newCard;
   }
 }
