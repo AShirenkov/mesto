@@ -109,8 +109,8 @@ enableValidation(validationConfig);
 const popupCardImage = new PopupWithImage(popupImgSelector);
 popupCardImage.setEventListeners();
 
-//callBack функция для попапа добавления новой карточки
-const handleNewCard = (formValues) => {
+// функция для попапа добавления новой карточки
+const createCard = (formValues) => {
   const userId = user.getUserId();
   const card = new Card(
     formValues,
@@ -125,14 +125,14 @@ const handleNewCard = (formValues) => {
   cardList.addItem(cardElement);
 };
 
-//Функция  для сабмита формы для добавления карточке с запросом на сервер
+//СallBack Функция  для сабмита формы для добавления карточке с запросом на сервер
 
 const handleNewCardServer = (formValues) => {
   popupAddCard.toggleSubmitButtonDescription();
   api
     .sendNewCard(formValues)
     .then((res) => {
-      handleNewCard(res);
+      createCard(res);
       popupAddCard.close();
     })
     .catch((err) => {
@@ -147,7 +147,7 @@ const handleNewCardServer = (formValues) => {
 const cardList = new Section(
   {
     renderer: (item) => {
-      handleNewCard(item);
+      createCard(item);
     },
   },
 
@@ -165,7 +165,7 @@ const user = new UserInfo({
 const popupAddCard = new PopupWithForm(popupCardSelector, handleNewCardServer);
 popupAddCard.setEventListeners();
 
-//callBack функция для попапа редактирования профиля
+//СallBack функция для сабмита попапа редактирования профиля
 
 const handleSetUserInfo = (formValues) => {
   const objUser = {
@@ -187,7 +187,7 @@ const handleSetUserInfo = (formValues) => {
       popupUserInfo.toggleSubmitButtonDescription();
     });
 };
-
+//СallBack функция для сабмита попапа смены аватара
 const handleSetUserAvatar = (formValues) => {
   const objAvatar = {
     avatar: formValues['linkAvatar'],
@@ -218,8 +218,7 @@ const popupUserAvatar = new PopupWithForm(
 );
 popupUserAvatar.setEventListeners();
 
-//Функция удаления объекта по его ID
-
+//СallBack Функция  для сабмита попапа удаления объекта по его ID
 const handleRemoveCardServer = (card) => {
   popupRemoveCard.toggleSubmitButtonDescription();
   api
@@ -243,6 +242,7 @@ const popupRemoveCard = new PopupWithConfirm(
 );
 popupRemoveCard.setEventListeners();
 
+//СallBack Функция  для обработки клика по лайку карточки
 const handleLikeClick = (card) => {
   if (card._isliked) {
     api
