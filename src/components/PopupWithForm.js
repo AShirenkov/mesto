@@ -36,10 +36,8 @@ export default class PopupWithForm extends Popup {
   toggleSubmitButtonDescription = () => {
     if (this._submitButton.textContent === 'Сохранение...') {
       this._submitButton.textContent = this._submitButtonDescription;
-      console.log(this._submitButton.textContent);
     } else {
       this._submitButton.textContent = 'Сохранение...';
-      console.log(this._submitButton.textContent);
     }
   };
 }

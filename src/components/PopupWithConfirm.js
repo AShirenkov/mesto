@@ -26,10 +26,8 @@ export default class PopupWithConfirm extends Popup {
   toggleSubmitButtonDescription = () => {
     if (this._submitButton.textContent === 'Удаление...') {
       this._submitButton.textContent = this._submitButtonDescription;
-      console.log(this._submitButton.textContent);
     } else {
       this._submitButton.textContent = 'Удаление...';
-      console.log(this._submitButton.textContent);
     }
   };
 }
