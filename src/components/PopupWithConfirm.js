@@ -6,6 +6,9 @@ export default class PopupWithConfirm extends Popup {
 
     this._form = this._popupElement.querySelector('.popup__edit-form');
     this._inputList = this._form.querySelectorAll('.popup__input-text');
+
+    this._submitButton = this._form.querySelector('.popup__save-button');
+    this._submitButtonDescription = this._submitButton.textContent;
   }
 
   open = (obj) => {
@@ -18,9 +21,15 @@ export default class PopupWithConfirm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._objForSubmit);
-      this.close();
-
-      //this._form.reset();
     });
   }
+  toggleSubmitButtonDescription = () => {
+    if (this._submitButton.textContent === 'Удаление...') {
+      this._submitButton.textContent = this._submitButtonDescription;
+      console.log(this._submitButton.textContent);
+    } else {
+      this._submitButton.textContent = 'Удаление...';
+      console.log(this._submitButton.textContent);
+    }
+  };
 }

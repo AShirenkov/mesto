@@ -131,7 +131,10 @@ const handleNewCardServer = (formValues) => {
   popupAddCard.toggleSubmitButtonDescription();
   api
     .sendNewCard(formValues)
-    .then(handleNewCard)
+    .then((res) => {
+      handleNewCard(res);
+      popupAddCard.close();
+    })
     .catch((err) => {
       console.log(err);
     })
@@ -175,6 +178,7 @@ const handleSetUserInfo = (formValues) => {
     .setUserInfo(objUser)
     .then((values) => {
       user.setUserInfo(values);
+      popupUserInfo.close();
     })
     .catch((err) => {
       console.log(err);
@@ -193,6 +197,7 @@ const handleSetUserAvatar = (formValues) => {
     .setUserAvatar(objAvatar)
     .then((values) => {
       user.setUserInfo(values);
+      popupUserAvatar.close();
     })
     .catch((err) => {
       console.log(err);
@@ -216,11 +221,18 @@ popupUserAvatar.setEventListeners();
 //Функция удаления объекта по его ID
 
 const handleRemoveCardServer = (card) => {
+  popupRemoveCard.toggleSubmitButtonDescription();
   api
     .removeCard(card._id)
-    .then(card.removeCard())
+    .then(() => {
+      card.removeCard();
+      popupRemoveCard.close();
+    })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupRemoveCard.toggleSubmitButtonDescription();
     });
 };
 
