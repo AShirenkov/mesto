@@ -11,7 +11,7 @@ export default class UserInfo {
       this._userDescriptionSelector
     );
     this._userAvatar = document.querySelector(this._userAvatarSelector);
-    this._UserId = null;
+    this._userId = null;
   }
 
   getUserInfo() {
@@ -28,8 +28,8 @@ export default class UserInfo {
     //console.log(`id=${data._id}`);
     this.setAvatarPic(objResponse.avatar);
   }
-  getUserId = () => this._UserId;
-  _setUserId = (id) => (this._UserId = id);
+  getUserId = () => this._userId;
+  _setUserId = (id) => (this._userId = id);
   setAvatarPic(avatar) {
     this._userAvatar.style.backgroundImage = `url(${avatar})`;
     //https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg//ссылка для отката на старую аватарку
