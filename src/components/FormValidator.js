@@ -8,8 +8,9 @@ export class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputTextClassError = config.inputTextClassError;
-    this._inputList = null;
-    this._submitButton = null;
+
+    this._inputList = this._form.querySelectorAll(this._inputSelector);
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
   }
   _hideInputError(errorTextElement) {
     errorTextElement.textContent = '';
@@ -72,8 +73,6 @@ export class FormValidator {
     });
   }
   enableValidation() {
-    this._inputList = this._form.querySelectorAll(this._inputSelector);
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
     this._setEventListeners();
   }
   resetValidation() {
