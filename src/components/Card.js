@@ -45,6 +45,7 @@ export default class Card {
   }
   removeCard() {
     this._newCard.remove();
+    this._newCard = null;
   }
 
   _checkLiked(objCardLikes) {

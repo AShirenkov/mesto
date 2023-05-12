@@ -35,6 +35,19 @@ const api = new Api({
 });
 
 //считываем список карточек с сервера
+/*Promise.all([api.getMyUser(), api.getInitialCards()])
+  .then((values) => {
+    user.setUserInfo(values[0]);
+    user.setUserId(values[0]['_id']);
+
+    return Promise.resolve(values[1]);
+  })
+  .then((values2) => {
+    cardList.renderItems(values2);
+  })
+  .catch((err) => {
+    console.log(err);
+  });*/
 
 Promise.resolve(api.getMyUser())
   .then((values) => {
