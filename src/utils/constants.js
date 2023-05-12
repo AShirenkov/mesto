@@ -1,7 +1,7 @@
-export const editProfileButton = document.querySelector(
+export const popupProfileOpenButton = document.querySelector(
   '.profile__edit-button'
 );
-export const editAvatarButton = document.querySelector(
+export const popupAvatarOpenButton = document.querySelector(
   '.profile__avatar-button'
 );
 export const popupUserSelector = '.popup_type_profile';

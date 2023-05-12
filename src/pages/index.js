@@ -8,8 +8,8 @@ import { FormValidator } from '../components/FormValidator.js';
 import Api from '../components/Api.js';
 import {
   validationConfig,
-  editProfileButton,
-  editAvatarButton,
+  popupProfileOpenButton,
+  popupAvatarOpenButton,
   addCardButton,
   cardTemplate,
   cardsSelector,
@@ -89,8 +89,8 @@ const openPopupAddCard = () => {
   formValidators[formAddCard.getAttribute('name')].resetValidation();
 };
 
-editProfileButton.addEventListener('click', openPopupProfile); //слушатели элементов на странице
-editAvatarButton.addEventListener('click', openPopupAvatar); //слушатели элементов на странице
+popupProfileOpenButton.addEventListener('click', openPopupProfile); //слушатели элементов на странице
+popupAvatarOpenButton.addEventListener('click', openPopupAvatar); //слушатели элементов на странице
 addCardButton.addEventListener('click', openPopupAddCard); //слушатели элементов на странице
 
 const formValidators = {};
