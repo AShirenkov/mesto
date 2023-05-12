@@ -58,12 +58,12 @@ export default class Card {
     return this._userId === this._ownerId;
   }
 
-  _setEventListeners(isOwner) {
+  _setEventListeners() {
     this._cardImg.addEventListener('click', () => {
       this._handleCardClick(this._link, this._name);
     });
 
-    if (isOwner) {
+    if (this._isOwner()) {
       this._removeCardButton.addEventListener('click', () => {
         this._handleCardRemove(this);
       });
@@ -91,7 +91,7 @@ export default class Card {
 
     this._cardImg.src = this._link;
     this._cardImg.alt = this._name;
-    this._setEventListeners(this._isOwner());
+    this._setEventListeners();
     this._checkLiked(this._arrLikes);
     this._isliked ? this._toggleLike() : false;
 
